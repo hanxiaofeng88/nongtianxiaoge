@@ -1,0 +1,35 @@
+.ellipsis{overflow:hidden;}
+select{margin:3px 0;height:35px;}
+select,.alizi-input-text {text-indent:3px;line-height:25px;margin-right:1px;}
+.alizi-order{color:#666;font-size:14px;font-weight:normal;}
+.alizi-quantity-readonly{width:40px;}
+.alizi-content{padding:8px;}
+.alizi-brief{border-bottom:10px;}
+.alizi-brief img{max-width:100%;}
+.alizi-main{float:left;width: 66.66666666666666%;}
+.alizi-side{float:left;width: 33.33333333333333%;overflow:hidden;}
+.alizi-title{padding:8px;height:30px;font-size:25px;}
+.alizi-title .icon-cart,.alizi-title .icon-shipping{width:25px;height:25px;margin-right:3px;}
+.alizi-params{padding:5px;}
+.alizi-rows{padding-top:5px;}
+.rows-head{margin-bottom:3px;padding:3px 0;font-size:14px;}
+.alizi-group{padding-left:20px;line-height:25px;padding-right:10px;}
+.alizi-group-box{width: 15px;padding-top:4px;}
+.alizi-group-box input + label:after{border:none;}
+.alizi-quantity,.quantity-inc,.quantity-dec{width:25px;height:25px;font-size:20px;line-height:25px;}
+.alizi-quantity{padding:0 5px;width:40px;}
+.alizi-total-price{font-size:25px;}
+.alizi-alert{padding: 5px;*margin-top:3px;margin-bottom: 15px;border-radius: 4px;}
+.alizi-btn{padding: 10px;margin-bottom: 0;font-size: 20px;line-height: 20px;border-radius:4px;}
+.alizi-scroll li{padding:5px;}
+.alizi-scroll .alizi-date{float:right;font-size:12px;}
+.alizi-id-btn{margin-bottom:15px;}
+.rows-id-verify .rows-params *{float:left;}
+.alizi-badge{padding:2px 3px;border-radius:2px;font-size:12px;height:12px;line-height:12px;margin-left:2px;}
+
+.alizi-theme-thin .alizi-rows{padding-top:2px;}
+.alizi-theme-thin .rows-head{width:80px;}
+.alizi-theme-thin .rows-params{margin-left:80px;padding:0 5px;}
+.alizi-theme-thin .alizi-params.alizi-params-image{padding:5px;}
+.alizi-theme-thin select,.alizi-theme-thin  .alizi-input-text{border-width:1px;padding:0;height:25px;}
+.alizi-theme-thin .rows-id-params-select .rows-params{margin-left:80px;}

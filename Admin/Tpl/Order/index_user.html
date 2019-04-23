@@ -1,0 +1,124 @@
+{:W("Main",array('module'=>MODULE_NAME,'action'=>ACTION_NAME,'do'=>$_GET['do']))}
+
+<div class="layout-main">    
+    <div id="breadclumb" class="box">
+        <h3><strong>{:lang('breadclumb_colon')}</strong>{:lang(MODULE_NAME)}<span></span>{:lang('order_list')}</h3>
+    </div>
+    <div id="CooperationMain" class="box clear-fix">   
+        <div class="layout-block-header">
+            <form action="__SELF__" method="get" id="searchform">
+            	<input type="hidden" name="s" value="{$Think.const.MODULE_NAME}" />
+				<input type="hidden" name="a" value="{$Think.const.ACTION_NAME}" />
+                <label>{:lang('order_search_colon')}</label>
+				<select name="fields">
+					<php>$fields=array('order_no'=>lang('order_number'),'item_name'=>lang('item_name'),'channel_id'=>lang('channel'));</php>
+					<volist name="fields" id="vo">
+					<option value="{$key}" <eq name="_GET.fields" value="$key">selected='selected'</eq>>{$vo}</option>
+					</volist>
+				</select>
+                <input type="text" name="keyword" value="{$_GET['keyword']|trim}" class="ui-text" autocomplete="off" size="40">
+                <button type="submit" class="btn btn-ok">{:lang('search')}</button>
+				<button type="submit" class="btn" name="aliziExcel">{:lang('download_order')}</button>
+				
+				<div class="search-list filter clear-fix">
+                    <label>{:lang('booking_time_colon')}</label>
+                    <input type="text" name="time_start" value="{$_GET['time_start']|trim}" size="11" class="ui-text Wdate" onclick="WdatePicker();">{:lang('to')}<input type="text" name="time_end" value="{$_GET['time_end']|trim}" size="11" class="ui-text Wdate" onclick="WdatePicker();">
+				
+					<select name="pageSize">
+						<php>$pageSize=array('25','50','100','500');</php>
+						<volist name="pageSize" id="vo">
+							<option value="{$vo}" <eq name="vo" value="$_GET['pageSize']">selected</eq>>每页显示{$vo}条</option>
+						</volist>
+					</select>
+                </div>
+				
+				<div class="search-list filter clear-fix">
+					<div class="title">{:lang('order_status_colon')}</div>
+					<div class="all"><q onclick="searchButtun('#status','')" <if condition="!is_numeric($_GET['status'])">class="select_item"</if>>所有</q></div>
+					<div class="division">|</div>
+					<div class="scope"><volist name="status" id="vo"><q onclick="searchButtun('#status','{$key}')" <if condition="is_numeric($_GET['status']) && $_GET['status'] eq $key">class="select_item"</if>>{$vo.name|strip_tags}({$vo.count})</q></volist></div>
+					<input type="hidden" name="status" id="status" value="{$_GET.status}">
+				</div>
+			
+				<div class="search-list filter clear-fix">
+					<div class="title">{:lang('payment_method_colon')}</div>
+					<div class="all"><q onclick="searchButtun('#payment','')" <if condition="!is_numeric($_GET['payment'])">class="select_item"</if>>所有</q></div>
+					<div class="division">|</div>
+					<div class="scope"><volist name=":C('PAYMENT')" id="vo"><q onclick="searchButtun('#payment','{$key}')" <if condition="is_numeric($_GET['payment']) && $_GET['payment'] eq $key">class="select_item"</if>>{$vo.name|strip_tags}</q></volist></div>
+					<input type="hidden" name="payment" id="payment" value="{$_GET.payment}">
+				</div>
+            </form>
+        </div>
+        
+		<form action="{:U('Order/deleteAll')}" method="post" id="deleteform">
+        <div class="ui-table">
+            <div class="ui-table-body ui-table-body-hover">
+                <table cellpadding="0" cellspacing="0" width="100%" >
+                    <thead>
+                        <tr class="ui-table-head">
+                            <th class="ui-table-hcell" width="15"><input type="checkbox" id="check_box" onclick="$.Select.All(this,'id[]');" ></th>
+                            <th class="ui-table-hcell" width="30">{:lang('id')}</th>
+                            <th class="ui-table-hcell" width="85">{:lang('order_number')}</th>
+                            <th class="ui-table-hcell">{:lang('item_name')}</th>
+                            <th class="ui-table-hcell" width="60">{:lang('amount_price')}</th>
+                            <th class="ui-table-hcell" width="80">{:lang('channel')}</th>
+							<th class="ui-table-hcell" width="80">{:lang('payment_status')}</th>
+							<th class="ui-table-hcell" width="60">{:lang('express')}</th>
+                            <th class="ui-table-hcell" width="80">{:lang('remark')}</th>
+                            <th class="ui-table-hcell" width="85">{:lang('time')}</th>
+                            <th class="ui-table-hcell" width="40">{:lang('action')}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+						<php>$payment = C('PAYMENT');</php>
+                        <volist name="list" id="vo">
+                        <tr id="row-{$vo.id}">
+                            <td><input type="checkbox" name="id[]" value="{$vo.id}" onclick="$.Select.This(this);"></td>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.order_no}</td>
+                            <td>{$vo.item_name}<notempty name="vo.item_params">（{$vo.item_params}）</notempty></td>
+                            <td>{$vo.quantity}/<b class="alert">{$vo.total_price}</b></td>
+                            <td>{$vo.channel_id}</td>
+                            <td>{$payment[$vo['payment']]['name']}<br>{:status($vo['status'],'',C('order_status'))}</td>
+                            <td>{:experss($vo['delivery_name'],$vo['delivery_no'])}</td>
+                            <td>
+								<php>
+									if($vo['status']==0){
+										echo $vo['remark'];
+									}else{
+										echo M('OrderLog')->where(array('order_id'=>$vo['id'],'status'=>$vo['status']))->getField('remark');
+									}
+								</php>
+							</td>
+                            <td>{$vo.add_time|date="y-m-d H:i",###}</td>
+                            <td class="action">
+                                <a href="{:U('Order/'.ACTION_NAME,array('do'=>'view','id'=>$vo['id']))}">{:lang('view')}</a>
+							</td>
+                        </tr>
+                        </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+          
+        <div class="ui-pager-bar clearfix" style="padding-left:10px;">
+			<div class="float-left">
+				<input type="hidden" name="model" value="{$Think.MODULE_NAME}">
+				<input type="checkbox" id="check_box" onclick="$.Select.All(this,'id[]');" >选择/反选 
+				<input type="button" name="del" value="批量删除" class="btn btn-ok" onclick="delConfirm()">
+				<input type="hidden" name="del" value="1">
+			</div>
+			<div class="ui-pager" style="float:right">{$page}</div>
+		</div>
+		
+		</form>
+</div><!--.box-->
+<script type="text/javascript" src="__PUBLIC__/Assets/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+function delConfirm(){
+	$.confirm('是否要删除？',function(){ 
+		$('#deleteform').submit();
+	},true)
+}
+</script>
+{:W("Foot")}   

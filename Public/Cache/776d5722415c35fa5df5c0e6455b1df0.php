@@ -1,0 +1,3 @@
+<?php
+//000000000000a:9:{s:8:"template";s:4:"thin";s:5:"width";s:5:"750px";s:5:"color";s:160:"{\"body_bg\":\"F1F1F1\",\"form_bg\":\"FFFFFF\",\"title_bg\":\"666666\",\"button_bg\":\"EE3300\",\"font\":\"333333\",\"border\":\"666666\",\"nav_bg\":\"EE3300\"}";s:7:"options";s:103:"[\"quantity\",\"price\",\"datetime\",\"name\",\"mobile\",\"region\",\"address\",\"remark\",\"payment\"]";s:11:"show_notice";s:1:"0";s:4:"info";s:0:"";s:12:"redirect_uri";s:0:"";s:2:"id";s:1:"8";s:6:"extend";s:132:"a:3:{s:7:\"padding\";s:1:\"0\";s:10:\"bottom_nav\";s:1:\"0\";s:15:\"bottom_nav_list\";a:3:{i:1;s:0:\"\";i:2;s:0:\"\";i:3;s:0:\"\";}}";}
+?>

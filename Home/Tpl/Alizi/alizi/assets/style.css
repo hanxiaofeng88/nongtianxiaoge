@@ -1,0 +1,46 @@
+*{margin:0;padding:0;}
+html{height:100%;}
+body{margin:0;padding:0;height:100%;background-image:url("bg.jpg");background-attachment:fixed;background-size:cover;background-position:center;font:14px/1.5 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", serif}
+h1{font-size:20px}
+h2{font-size:16px}
+a{color:#EB5F3E;text-decoration:none}
+a:hover{text-decoration:underline}
+.label{background:#EB5F3E;padding:5px 8px;border-radius:3px;font-size:12px;color:#fff;vertical-align:middle}
+.wrapper{background-color:#f1f1f1;background-color:rgba(255, 255, 255, .2);max-width:750px;margin:0 auto}
+.header{padding:10px 20px;border-bottom:1px solid #ccc;border-bottom:1px solid rgba(255, 255, 255, .1);color:#fff;}
+.alizi-detail-content{padding:0 10px;}
+.alizi-page{padding:1px 0}
+.alizi-page img{max-width:100%;}
+.alizi-page .box{margin:15px 10px;padding:5px 0;background:#fff}
+.alizi-page .box a:hover{text-decoration:none}
+.alizi-page .box a:hover span{text-decoration:underline}
+.alizi-page .box a:hover .label{text-decoration:none}
+.alizi-page .box h2.title{margin:0;padding:5px 10px;border-bottom:1px solid #ccc;font-weight:normal;background: url(vline.jpg) no-repeat 15px center;padding-left: 27px;}
+.alizi-page .box-image .box-content{text-align:center;}
+.alizi-page .box .box-content table.links{margin-top:-1px;width:100%;border-spacing:0;border-collapse:collapse}
+.alizi-page .box .box-content table.links td{padding:3px 3px 3px 10px;border:1px solid #ddd;border-left:0}
+.alizi-page .box .box-content table.links td:nth-child(2){border-left:1px solid #ddd;border-right:0}
+.alizi-page .box .box-content table.links td a{display:block}
+.alizi-page .alizi-order{border-bottom:none;}
+.alizi-remark{color:#ccc;padding-top:10px;}
+.alizi-footer{color:#888;text-align:center;border-top:none;}
+.alizi-footer p{padding:0 0 20px 0;font-size:12px}
+
+.alizi-plug {height:54px;color:#fff;overflow:hidden;}
+.alizi-plug .price{float:left;height:54px;width:60%;background: #f61d4b;vertical-align:bottom;}
+.alizi-plug .price .symbol{float:left;vertical-align:bottom;padding-top:28px;}
+.alizi-plug .current-price{float:left;font-size:45px;line-height:54px;vertical-align:bottom;letter-spacing:-3px;}
+.alizi-plug .group{float:left;margin-left:5px;}
+.alizi-plug .original-price{padding-top:5px;line-height:20px;vertical-align:top;display:block;}
+.alizi-plug .salenum{line-height:20px;vertical-align:bottom;height: 25px;line-height: 25px;padding: 2px;background: #ca032e;border-radius: 1px;}
+.alizi-plug .timer{float:left;height:54px;width:40%;background: #eee;color:#555;text-align:center;line-height:20px;font-weight:bold;}
+.alizi-plug .timer .tt{padding-top:5px;color:#f00;}
+
+.alizi-content-title{padding:15px;border-bottom:1px solid #eee;}
+.baoyou{ height:25px;line-height:25px; border-bottom:1px #eee solid;overflow:hidden; padding:10px 0 10px 10px;}
+.baoyou span{padding-left:22px; float:left; margin-right:5px; display:inline; font-size:13px;background-size:20px 20px;}
+.by{background:url(you.jpg) no-repeat left 1px;}
+.huo{background:url(huo.jpg) no-repeat left 1px;}
+.tui{background:url(tui.jpg) no-repeat left 1px;}
+.gou{margin: 15px;height: 58px;background: #c60a1e;border-radius: 3px;font-size: 18px;color: #fff;text-align: center;line-height: 58px;}
+.gou a{color:#fff;font-size:18px;text-decoration:none;}

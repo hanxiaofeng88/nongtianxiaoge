@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link href="__PUBLIC__/Assets/css/esui.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Assets/css/union.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Assets/js/jquery.form.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Assets/js/jscolor.min.js"></script>
+<style>
+.info-table th, .info-table td{padding:3px 5px;}
+</style>
+</head>
+<body>
+<div class="layout-main">    
+    <div class="box clear-fix">
+		<form method="post" action="{:U('Item/template')}" id="ajaxform" enctype="multipart/form-data">
+		<table class="info-table">
+			<tbody>
+				<tr>
+					<th><b class="verifing">*</b>{:lang('select_template_colon')}</th>
+					<td>
+						<select name="template" onchange="changeTheme(this.value)">
+							<optgroup label="—系统模板—">
+								<php>$template = C('ALIZI_TEMPLATE');</php>
+								<volist name="template" id="vo">
+								<option value="{$key}" <eq name="temp.template" value="$key">selected</eq>>{$vo.name}</option>
+								</volist>
+							</optgroup>
+							<notempty name="custom">
+							<optgroup label="—自定义模板—">
+								<volist name="custom" id="vo">
+								<option value="{$vo.id}" <eq name="temp.template" value="$vo.id">selected</eq>>{$vo.name}</option>
+								</volist>
+							</optgroup>
+							</notempty>
+						</select>
+						
+						<span style="margin-left:60px;">模板宽度：<input type="text" class="ui-text" name="width" size="6" value="<empty name='temp.width'>750px<else />{$temp.width}</empty>"></span>
+						<span class="ui-validityshower-info">（单位px或%）</span>
+						<span style="margin-left:60px;">边距宽度：<input type="text" class="ui-text" name="padding" size="6" value="<empty name='extend.padding'>0<else />{$extend.padding}</empty>"></span>
+						<span class="ui-validityshower-info">（单位px）</span>
+					</td>
+				</tr>
+				<tr>
+					<php>$color = json_decode($temp['color'],true);</php>
+					<th><b class="verifing">*</b>{:lang('模板颜色_colon')}</th>
+					<td class="colors">
+						<volist name="deaultColor" id="value">
+						<label class="ui-group-label">{$key|lang}<input type="text" id="color_{$key}" name="color[{$key}]" size="3" class="jscolor" value="<empty name='color'>#{$value}<else />{$color[$key]}</empty>"></label>
+						</volist>
+						<button type="button"class="ui-button" onclick="resetColor()" />重置</button>	
+					</td>
+				</tr>
+				<tr>
+					<th><b class="verifing">*</b>{:lang('表单选项_colon')}</th>
+					<td>
+						<volist name="options" id="vo">
+						<input name="options[]" type="checkbox" value="{$key}" <notempty name="vo.checked">checked</notempty>><label>{$vo.name}</label>&nbsp;&nbsp;
+						</volist>
+					</td>
+				</tr>
+				<tr>
+					<th>显示通知</th>
+					<td>
+						{:status($temp['show_notice'],'radio','0:不显示;1:下方显示;2:右侧显示','show_notice')}
+					</td>
+				</tr>
+				<tr>
+					<th>底部导航</th>
+					<td class="bottom_nav">
+						{:status($extend['bottom_nav'],'radio','0:不显示;1:显示1个;2:显示2个;3:显示3个','bottom_nav')}
+					</td>
+				</tr>
+		
+				<tr>
+					<th>底部导航内容</th>
+					<td>
+						<p class="alert">填写格式为：内容||链接地址||图标</p>
+						<p class="bottom_nav_list-1"><input type="text" class="ui-text"  size="60" name="bottom_nav_list[1]" value="{$extend['bottom_nav_list'][1]}" >例：立即下单||#aliziOrder||edit</p>
+						<p class="bottom_nav_list-2"><input type="text" class="ui-text"  size="60" name="bottom_nav_list[2]" value="{$extend['bottom_nav_list'][2]}" >例：联系电话||tel:13888888888||call</p>
+						<p class="bottom_nav_list-3"><input type="text" class="ui-text"  size="60" name="bottom_nav_list[3]" value="{$extend['bottom_nav_list'][3]}" >例：订单查询||http://{$_SERVER['HTTP_HOST']}{:C('ALIZI_ROOT')}?m=Order&a=query||query</p>
+					</td>
+				</tr>
+				<!--
+				<tr>
+					<th>显示评论</th>
+					<td>
+						{:status($temp['show_comments'],'radio','0:不显示;1:显示','show_comments')}
+					</td>
+				</tr>
+				-->
+				<tr>
+					<th>说明信息</th>
+					<td>
+						 <input type="button" value="插入html" onclick="insertHtml()" class="ui-button" />
+						<textarea name="info" id="content" class="input-textarea editor" cols="80" rows="2"  style="width:600px;">{$temp.info}</textarea>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>调用代码</th>
+					<td>
+						<textarea name="using" id="using" class="input-textarea" cols="80" rows="3"  style="width:95%;"><iframe id="aliziIframe" name="aliziIframe" src="{$url.order}" width="100%" height="100%" scrolling="no" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe></textarea>
+					</td>
+				</tr>
+				<tr>
+					<th>返回页面</th>
+					<td>
+						<input name="redirect_uri" class="ui-text" size="50" id="redirect_uri" type="text" value="{$temp.redirect_uri}" >
+						<span class="ui-validityshower-info">（下单成功后点击返回页面）</span>
+					</td>
+				</tr>
+				<tr>
+					<th>模板调用</th>
+					<td>
+						<input type="submit"class="btn btn-ok" value="保存设置" />
+						<a class="url btn" href="{$url.order}" id="tpl1" target="_blank">推广链接一</a>
+						<a class="url-detail btn" href="{$url.detail}" id="tpl2" target="_blank">推广链接二</a>
+					</td>
+				</tr>
+				<tr style="display:none;">
+					<th>&nbsp;</th>
+					<td>
+						<input type="hidden" name="id" value="{$_GET['id']}" />
+						<input type="hidden" name="user_id" value="{$_SESSION.user.id}" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+    </div><!--.box-->
+<script type="text/javascript">
+$(function(){
+    $('#ajaxform').ajaxForm({
+        success:function(data){ 
+			color = data.data;
+			parent.$.alert('保存成功',1);
+		},
+        dataType: 'json'
+    });
+	bottomNav();
+});
+function bottomNav(){
+	var nav = $("input[name=bottom_nav]:checked").val();
+	console.log(nav);
+}
+function resetColor(color){ 
+	var color = color?color:{$deaultColor|json_encode};
+	for(var key in color){ 
+		var fontColor = key=='body_bg' || key=='form_bg'?'#000000':'#FFFFFF';
+		$('#color_'+key).val(color[key]).css({"background-color":'#'+color[key],'color':fontColor});
+	}
+}
+
+function changeTheme(theme){
+	$.getJSON("?m=Item&a=getCustomColor&tpl="+theme, function(color) {
+		resetColor(color.data);
+	});
+}
+</script>   
+<link href="__PUBLIC__/Assets/js/umeditor/themes/default/css/umeditor.min.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Assets/js/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Assets/js/umeditor/umeditor.min.js"></script>
+<script type="text/javascript">  
+UM.getEditor('content',{autoHeightEnabled:true,initialFrameWidth:800,initialFrameHeight:60});
+function insertHtml() {
+	var value = prompt('插入HTML代码', '');
+	if(value){
+		UM.getEditor('content').execCommand('insertHtml', value);
+		$.alert(info+'添加成功',1);
+	} 
+}
+</script>  
+</body>
+</html>

@@ -1,0 +1,71 @@
+<html>
+<head><block name="head">
+<title><notempty name="info.name">{$info.name} - </notempty>{$aliziConfig.title}</title>
+<meta charset="utf-8" />
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="apple-touch-fullscreen"/>
+<meta content="telephone=no" name="format-detection"/>
+<link rel="dns-prefetch" href="http://{$_SERVER['SERVER_NAME']}">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no" name="viewport">
+<meta name="description" content="<empty name='info.brief'>{$aliziConfig.description}<else />{$info.brief}</empty>">
+<meta name="keywords" content="<notempty name="info.tags">{:str_replace('#',' ',$info['tags'])}</notempty> {$aliziConfig.keywords}">
+<meta name="author" content="{:lang('author')}">
+<link rel="shortcut icon" href="__PUBLIC__/Assets/img/alizi.ico" />
+<link href="__PUBLIC__/Alizi/alizi-order.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet">
+<!--[if lt IE 9]><link href="__PUBLIC__/Alizi/alizi-ie.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet"><![endif]-->
+</head>
+<body>
+
+<script type="text/javascript">
+	function onBridgeReady(){
+	   WeixinJSBridge.invoke(
+		   'getBrandWCPayRequest', {$wxPayRequest},
+		   function(res){   
+				
+			   if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+					window.location.href = "{:U('Order/result',array('order_no'=>$order['order_no']))}";
+			   }else{
+					//alert(res.err_msg);
+					//window.location.href = "{:U('Order/result',array('order_no'=>$order['order_no']))}";
+			   }
+		   }
+	   ); 
+	}
+	if (typeof WeixinJSBridge == "undefined"){
+	   if( document.addEventListener ){
+		   document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+	   }else if (document.attachEvent){
+		   document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+		   document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+	   }
+	}else{ onBridgeReady();}
+</script>
+<div class="result">
+	<h1>{:lang('order_submit_success')}</h1>
+    <div class="innner">
+        <div class="order" style="min-height: calc(100vh - 244px);">
+			<ul>
+				<li><label>{:lang('order_status_colon')}</label><span><php>$status=C('ORDER_STATUS');</php>{$status[$order['status']]}</span></li>
+				<li><label>{:lang('order_number_colon')}</label><span>{$order.order_no}</span></li>
+				<li><label>{:lang('item_name_colon')}</label><span>{$order.item_name}</span></li>
+				<li><label>{:lang('order_quantity_colon')}</label><span>{$order.quantity}</span></li>
+				<li><label>{:lang('order_price_colon')}</label><span>{$order.total_price}{:lang('yuan')}</span></li>
+			</ul>
+			
+        </div>
+        <div class="foot">
+			<a href="javascript:;" onclick="onBridgeReady()" class="foot_btn">重新支付</a>
+            <a href="{$order.url}" class="foot_btn" style="background-color:#888;">{:lang('goback')}</a>
+			<p>{$aliziConfig.footer}</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+seajs.use(['jquery'],function($){
+	var order_id = "{$order['id']}";
+	$.ajax({ url:"{:U('Api/send')}",timeout:100,data:{order_id:order_id} });
+});
+</script>
+</body>
+</html>

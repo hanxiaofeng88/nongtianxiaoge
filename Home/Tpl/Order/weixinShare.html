@@ -1,0 +1,14 @@
+<if condition="isWeixin()">
+<script type="text/javascript">
+seajs.use(['jquery'], function($) {
+	$(function(){
+	  $('body').delegate('.alizi-btn-share','click',function(){
+		wxShare();
+	  })
+  })
+});
+function wxShare(){
+	window.location.href = "{:U('Order/wx',array('id'=>$info['sn'],'uid'=>$_GET['uid'],'c'=>$_GET['c']))}";
+}
+</script>
+</if>

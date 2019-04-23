@@ -1,0 +1,68 @@
+<extend name="alizi" />
+<block name="css">
+<style>
+*{margin:0;padding:0;}
+select{height:40px;line-height:40px;font-size:16px;}
+.rows-head{font-size:20px;margin-bottom:10px;border-bottom:2px solid #aaa;}
+.alizi-input-text{height:28px;line-height:28px;font-size:18px;}
+.alizi-query-wrap{background:#fff;padding:40px;}
+.query_result li{border:1px solid #ccc;}
+.query_result p{margin-bottom:0;}
+.query_result tr th {padding:5px;background:#7d4707;color:#fff;text-align:left;}
+.query_result tr td {padding:5px;}
+.query_result h2 {color:#3a1300;font-size:16px;}
+.query_result .price {color:#f60;}
+.query_result .links {color:#06c;}
+.query_form{margin-top:10px;}
+.query_form .query_text{float:left;border:2px solid #DDD;border:2px solid #DDD;width:300px;height:36px;line-height:36px;padding:0 10px;outline:none;}
+.query_form .query_button{float: left;color: #FFF;display: block;width:120px;height: 40px;background-color: #FF9934;font-size: 16px;border:none;text-align:center;cursor:pointer;transition: all 0.3s linear 0s;}
+.query_form .query_button:hover{background-color: #FF6600;}
+</style>
+</block>
+<block name="body">
+<div class="alizi-query clearfix">
+	<div class="alizi-content">
+		<form action="{:U('Order/apply')}" method="post" id="aliziForm">
+			<div class="alizi-rows clearfix rows-id-extends">
+				<label class="rows-head">申请退款</label>
+				<div class="rows-params">
+					<input type="tel" name="order_no" autocomplete="off" required="required" placeholder="请输入订单编号" class="alizi-input-text">
+				</div>
+				<div class="rows-params">
+					<input type="tel" name="mobile" autocomplete="off" required="required" placeholder="请输入下单手机号" class="alizi-input-text">
+				</div>
+				<div class="rows-params">
+					<label class="ellipsis alizi-params alizi-payment-3 active"><input type="radio" name="refund_payment" value="微信" checked>退款到微信</label>
+					<label class="ellipsis alizi-params alizi-payment-2 "><input type="radio" name="refund_payment" value="支付宝">退款到支付宝</label>
+				</div>
+				<div class="rows-params">
+					<input type="text" name="refund_account" autocomplete="off" required="required" placeholder="请输入您的收款微信/支付宝账号" class="alizi-input-text">
+				</div>
+			</div>
+			<div class="alizi-rows alizi-id-btn clearfix">
+				<input type="submit" id="alizi-query-btn" class="alizi-btn alizi-submit" value="{:lang('submit')}" />
+			</div>
+		</form>	
+	</div>
+</div>
+
+<script type="text/javascript">
+seajs.use(['alizi','jquery/form'],function(alizi,form){
+	$('#aliziForm').ajaxForm({
+		timeout: 50000,
+		dataType: 'json',
+		error:function(){  layer.closeAll(); alert(lang.ajaxError); },
+		beforeSubmit:function(){ layer.closeAll();layer.load(); },
+		success:function(data){
+			layer.closeAll();
+			layer.msg(data.info);
+		}
+	});
+});
+function payment(){
+	var payment=$('#alizi-payment-info');
+	if(info){ payment.show().find('.payment-info').html(info);}else{payment.hide();}
+	this.quantity(0);
+}
+</script>
+</block>

@@ -1,0 +1,16 @@
+*{margin:0;padding:0;}
+html{height:100%;}
+body{margin:0;padding:0;font:14px/1.5 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", serif;}
+img{max-width:100%;}
+.alizi-order{border:4px solid #0C0;}
+.alizi-title{height:55px;background:url(title.gif) -10px 5px no-repeat;text-indent:-9999em;overflow:hidden;border-bottom:1px solid #0C0;background-color:transparent !important;}
+.alizi-side .alizi-title{background-position:-10px -55px;}
+.alizi-side{margin-left:-1px;border-left:1px solid #0C0;}
+.alizi-side.alizi-full-row{border-top:4px solid #0C0;}
+.rows-id-params input {display: inline-block;margin-right: 5px;}
+.alizi-rows{margin-top:5px !important;}
+.alizi-theme-thin .rows-id-params .rows-head{display:block;}
+.alizi-theme-thin .rows-id-params .rows-params{margin-left:80px;}
+.alizi-theme-thin .rows-id-params .rows-params a{display:block;width:100%;color:#333 !important;background:none;border:none;line-height:22px;padding:0;}
+.alizi-theme-thin .rows-id-params .rows-params a img{display:none;}
+.alizi-theme-thin .rows-id-params .rows-params a:hover,.alizi-theme-thin .rows-id-params .rows-params a.active {color:#f60 !important;}

@@ -1,0 +1,85 @@
+<extend name="alizi" />
+<block name="css">
+<style>
+*{margin:0;padding:0;}
+.rows-head{font-size:20px;margin-bottom:10px;border-bottom:2px solid #aaa;}
+.alizi-input-text{height:28px;line-height:28px;font-size:18px;}
+.alizi-query-wrap{background:#fff;padding:40px;}
+.query_result li{border:1px solid #ccc;}
+.query_result p{margin-bottom:0;}
+.query_result tr th {padding:5px;background:#7d4707;color:#fff;text-align:left;}
+.query_result tr td {padding:5px;}
+.query_result h2 {color:#3a1300;font-size:16px;}
+.query_result .price {color:#f60;}
+.query_result .links {color:#06c;}
+.query_form{margin-top:10px;}
+.query_form .query_text{float:left;border:2px solid #DDD;border:2px solid #DDD;width:300px;height:36px;line-height:36px;padding:0 10px;outline:none;}
+.query_form .query_button{float: left;color: #FFF;display: block;width:120px;height: 40px;background-color: #FF9934;font-size: 16px;border:none;text-align:center;cursor:pointer;transition: all 0.3s linear 0s;}
+.query_form .query_button:hover{background-color: #FF6600;}
+</style>
+</block>
+<block name="body">
+<div class="alizi-query clearfix">
+	<div class="alizi-content">
+		<form action="{:U('Order/query')}" method="post" id="aliziForm">
+			<div class="alizi-rows clearfix rows-id-extends">
+				<label class="rows-head">{:lang('order_query')}</label>
+				<div class="rows-params">
+					<input type="tel" name="kw" autocomplete="off" required="required" placeholder="{:lang('mobile_/_order_number')}" class="alizi-input-text">
+				</div>
+			</div>
+			<div class="alizi-rows alizi-id-btn clearfix">
+				<input type="submit" id="alizi-query-btn" class="alizi-btn alizi-submit" value="{:lang('submit_query')}" />
+			</div>
+		</form>	
+		<div id="alizi-query-result" class="query_result"></div>
+	</div>
+</div>
+<script id="alizi-query" type="text/html">
+{{each list as value i}}
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr><th>{:lang('order_colon')}{{value.order_no}}</th></tr>
+	<tr>
+		<td>
+			<h2>{{value.title}}</h2>
+			{{#value.itemExtends}}
+			{{if value.address}}{:lang('delivery_address_colon')}{{value.address}}{{/if}}
+			{{if value.express}}<p>{:lang('express_query_colon')}{{#value.express}}</p>{{/if}}
+			<p>
+				{:lang('order_status_colon')}{{value.status}}
+				{{if value.order_status=='0' && value.payment!='1' && value.payment!='6'}}
+				<a href="{:C('ALIZI_ROOT')}index.php?m=Order&a=pay&order_no={{value.order_no}}" class="links" target="_blank">[{:lang('pay')}]</a>
+				{{/if}}
+			</p>
+			<p>{:lang('quantity_price_colon')}{{value.quantity}}/<span class="price">{{value.price}}{:lang('yuan')}</span></p>
+			<p>{:lang('booking_time_colon')}{{value.time}}</p>
+		</td>
+	</tr>
+</table>
+{{/each}}
+</script>
+<script type="text/javascript">
+seajs.use(['alizi','jquery/form','art/template'],function(alizi,form,template){
+	$('#aliziForm').ajaxForm({
+		timeout: 50000,
+		dataType: 'json',
+		error:function(){  layer.closeAll(); alert(lang.ajaxError); },
+		beforeSubmit:function(){ layer.closeAll();layer.load(); },
+		success:function(data){
+			layer.closeAll();
+			if(data.status=='1'){
+				var html = template('alizi-query', data.data);
+				document.getElementById('alizi-query-result').innerHTML = html;
+			}else{ 
+				layer.msg(data.info);
+				document.getElementById('alizi-query-result').innerHTML = "<div class='alizi-rows'>"+data.info+"</div>";
+			}
+		}
+	});
+});
+function delivery(order,id){
+	var url = "{:C('ALIZI_ROOT')}index.php?m=Index&a=delivery&order="+order+"&id="+id+"&ord=asc&show=json",title="{:lang('shipping_query')}";
+	layer.open({type: 2,shade: .2,shadeClose: true,title: title,area: ['600px', '60%'],content:url}); 
+}
+</script>
+</block>

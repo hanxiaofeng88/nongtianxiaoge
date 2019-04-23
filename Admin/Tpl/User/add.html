@@ -1,0 +1,83 @@
+{:W("Main",array('module'=>MODULE_NAME,'action'=>ACTION_NAME,'do'=>$_GET['do']))}
+
+<div class="layout-main">    
+    <div id="breadclumb" class="box">
+        <h3><strong>{:lang('breadclumb_colon')}</strong>{:lang(MODULE_NAME)}<span></span><empty name="_GET.id">{:lang('add')}<else />{:lang('edit')}</empty></h3>
+    </div>
+    <div class="box clear-fix">
+        <div class="layout-block-header"><h2>{:lang('details_info')}</h2></div>  
+        <div id="AccountInfo">
+            <div class="info-block">
+                <form method="post" action="{:U(MODULE_NAME.'/proccess/')}" id="ajaxform" enctype="multipart/form-data">
+                <table class="info-table">
+                    <tbody>
+                    <tr>
+                    	<th><b class="verifing">*</b>{:lang('user_type_colon')}</th>
+                        <td><select name="role"><option value="member">{:lang('member')}</option><option value="admin">{:lang('admin')}</option></select></td>
+                    </tr>
+					<tr>
+                    	<th><b class="verifing">*</b>{:lang('status_colon')}</th>
+                        <td><select name="status"><option value="1">启用</option><option value="0">禁用</option></select></td>
+                    </tr>
+					<tr>
+                    	<th><b class="verifing">*</b>{:lang('username_colon')}</th>
+                        <td><input type="text" name="username" class="ui-text validate[required,minSize[4]]" /></td>
+                    </tr>
+                    <tr>
+                    	<th><b class="verifing">*</b>{:lang('login_password_colon')}</th>
+                        <td><input type="password" name="password" id="password" class="ui-text validate[required,minSize[6]]" /></td>
+                    </tr>
+                    <tr>
+                    	<th><b class="verifing">*</b>{:lang('confirm_password_colon')}</th>
+                        <td><input type="password" name="repassword" class="ui-text validate[required,equals[password]]" /></td>
+                    </tr>
+                    <tr><th><b class="verifing">*</b>{:lang('realname_colon')}</th><td><input name="realname" type="text" class="ui-text validate[required,minSize[2]]"></td></tr>
+                    <tr><th><b class="verifing">*</b>{:lang('mobile_colon')}</th><td><input name="mobile" type="text" class="ui-text validate[required,custom[mobile]]"></td></tr>
+                    <tr><th>{:lang('qq_colon')}</th><td><input name="qq" type="text" class="ui-text" ></td></tr>
+                    <tr>
+                    	<th>&nbsp;</th>
+                        <td>
+                        	<input type="hidden" name="action" value="add" />
+                        	<input type="submit" class="btn btn-ok" value="{:lang('confirm')}" />
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+                </form>
+            </div>
+        </div>  
+    </div><!--.box-->
+<link href="__PUBLIC__/Assets/js/validation/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Assets/js/validation/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Assets/js/validation/jquery.validationEngine-zh_CN.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#ajaxform").validationEngine('attach', {promptPosition : "centerRight", autoPositionUpdate : true}); 
+    $('#ajaxform').ajaxForm({
+        timeout: 5000,
+        error:function(){ $('#ajaxLoading').hide();alert("{:lang('ajaxError')}");},
+        beforeSubmit:function(){ $('#ajaxLoading').show();},
+        success:function(data){ 
+            $('#ajaxLoading').hide();
+            if(data.status==1){
+                var redirectURL = "<empty name='_GET.id'>{:U('User/index')}<else />{$_SERVER['HTTP_REFERER']}</empty>";
+                $.alert(data.info,data.status,function(){window.location.href=redirectURL});
+            }else{
+                $.alert(data.info,data.status);
+            }
+        },
+        dataType: 'json'
+    });
+});
+
+function itemAdd(){
+	var item = '<p style="margin-top:5px;">{:lang('name_colon')}<input name="title[]" type="text" class="ui-text" value="{$info.title}" size="20">{:lang('price_colon')}<input name="price[]" type="text" class="ui-text" value="{$info.price}" size="4"><input type="button" class="ui-button" value="{:lang('delete')}" onclick="itemDel($(this))" /></p>';
+	$('.item-list').append(item);
+}
+function itemDel(obj){
+	obj.parent().remove();
+}
+</script>     
+       
+{:W("Foot")}   

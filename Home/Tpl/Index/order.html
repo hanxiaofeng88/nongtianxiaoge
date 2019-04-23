@@ -1,0 +1,87 @@
+<extend name="Order:alizi" />
+<block name="css">
+<link href="__PUBLIC__/Alizi/pc/alizi.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet">
+<notempty name="aliziConfig.lazyload">
+<script type="text/javascript">
+seajs.use(['jquery/lazyload'], function() {
+	$(".alizi-detail-content img").lazyload({ placeholder : "__PUBLIC__/Alizi/alizi.gif",effect : "fadeIn",threshold:500});
+});
+</script>
+</notempty>
+</block>
+<block name="body">
+<include file="Index:header" />
+
+<div class="mainwidth" id="alizi-show-bar">
+	<div class="alizi-detail-header clearfix">
+		<div class="mainwidth header-wrap">
+			<a class="booking-now" href="#aliziOrder">{:lang('bookingNow')}</a>
+			<notempty name="info.image"><h1 class="title"><img src="{$info.image|imageUrl}"></h1></notempty>
+			<dl>
+				<dt class="ellipsis">{$info.name}
+					<notempty name="info.tags"><volist name=":explode('#',$info['tags'])" id="vo"><span class="alizi-badge">{$vo}</span></volist></notempty>
+				</dt>
+				<dd class="ellipsis">{$info.brief}</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+			
+<div class="container">
+	<div class="mainwidth">
+		<script type="text/javascript">
+		seajs.use(['jquery'], function() {
+			$(window).scroll(function(){
+				var winHeight = $(this).height(),orderTop = $('.alizi-order').offset().top,docTop = $(document).scrollTop(),nav=$('.alizi-foot-nav'),navHeight=nav.height();
+				if(docTop+winHeight/2>=orderTop){ nav.slideUp(); }else{ nav.slideDown(); }
+			})
+			var elm = $('#alizi-show-bar'); 
+			var startPos = $(elm).offset().top; 
+			$.event.add(window, "scroll", function() { 
+				var p = $(window).scrollTop(); 
+				if(((p) > startPos)){ elm.addClass('alizi-fixed'); }else{ elm.removeClass('alizi-fixed'); }
+			}); 
+		});
+		</script>
+		<div class="alizi-detail-wrap clearfix">
+			<div class="alizi-detail-content">
+			<php>
+				$info['content'] = explode('{[AliziOrder]}',$info['content']);
+				foreach($info['content'] as $key=>$content){ echo $content;if($key==0){W('Order',array_merge($_GET,array('page'=>'system')));} }
+			</php>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+seajs.use(['alizi','jquery/form','lang'],function(alizi){
+	window.alizi = alizi;
+	alizi.quantity(0);
+	var btnSubmit = $('.alizi-submit');
+	$('#aliziForm').ajaxForm({
+		timeout: 50000,
+		dataType: 'json',
+		error:function(){ layer.closeAll(); alert(lang.ajaxError); btnSubmit.attr('disabled',false).val(lang.submit); },
+		beforeSubmit:function(){
+			if(checkForm('#aliziForm')==false) return false;
+			layer.closeAll();layer.load();
+			btnSubmit.attr('disabled',true).val(lang.loading);
+		},
+		success:function(data){
+			layer.closeAll();layer.closeAll();
+			if(data.status=='1'){
+				var redirect = "{:U('Order/pay',array('order_no'=>'__orderNo__'))}";
+				top.window.location.href = redirect.replace('__orderNo__',data.data.order_no);
+			}else{
+				btnSubmit.attr('disabled',false).val(lang.submit);
+				layer.msg(data.info);
+			}
+		}
+	});
+});
+</script>
+</block>
+
+<block name="foot">
+<include file="Index:footer" />
+</block>

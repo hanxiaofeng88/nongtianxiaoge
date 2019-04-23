@@ -1,0 +1,48 @@
+<extend name="Order:alizi" />
+<block name="body">
+<div class="result">
+	<h1>{:lang('order_submit_success')}</h1>
+    <div class="innner">
+        <div class="order" style="min-height: calc(100vh - 244px);">
+            <div class="succtop">
+				<span class="text">{:lang('order_number_colon')}{$order.order_no}</span>
+				<span style="margin-left:20px;">{:lang('order_price_colon_symbol')}<b class="price">{$order.total_price}</b></span>
+			</div>
+			<div class="succtop">
+				<div class="qrcode"><img src="http://{$_SERVER['HTTP_HOST']}{:C('ALIZI_ROOT')}Api/qrcode.php?data={$result.code_url}" /></div>
+				<if condition="isWeixin()">
+				<p class="text">长按二维码，进行支付<br>请选择<b>【识别图中二维码】</b></p>
+				<else />
+				<p class="text">使用<b>【微信扫一扫】</b>，进行支付</p>
+				</if>
+			</div>
+        </div>
+        <div class="foot">
+            <a href="{$order.url}" class="foot_btn">{:lang('goback')}</a>
+			<p>{$aliziConfig.footer}</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+seajs.use(['jquery'],function(jquery){
+	var order_id = "{$order['id']}";
+	$.ajax({ url:"{:U('Api/send')}",timeout:100,data:{order_id:order_id} });
+	setInterval(query,1500);
+});
+function query(){
+	var order_no = "{$order.order_no}";
+	$.ajax({
+		url:'{:U("Order/orderQuery")}',
+		type:'get',
+		data:{order_no:order_no},
+		dataType:'json',
+		success:function(data){
+			if(data.status=='1' || data.status=='3'){
+				window.location.href="{:U('Order/result',array('order_no'=>$order['order_no']))}";
+			}
+			console.log(data);
+		}
+	})
+}
+</script>
+</block>

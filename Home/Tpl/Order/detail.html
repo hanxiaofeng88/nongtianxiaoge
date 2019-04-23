@@ -1,0 +1,35 @@
+<extend name="Order/alizi" />
+<block name="body">
+<notempty name="aliziConfig.lazyload">
+<script type="text/javascript">
+seajs.use(['jquery/lazyload'], function() {
+	$(".alizi-detail-content img").lazyload({ placeholder : "__PUBLIC__/Alizi/alizi.gif",effect : "fadeIn",threshold:500});
+});
+</script>
+</notempty>
+<div class="alizi-detail-wrap clearfix">
+	<div class="alizi-detail-header clearfix">
+		<notempty name="info.image"><h1 class="title"><img src="{$info.image|imageUrl}"></h1></notempty>
+		<dl>
+			<dt class="ellipsis">{$info.name}
+				<notempty name="info.tags"><volist name=":explode('#',$info['tags'])" id="vo"><span class="alizi-badge">{$vo}</span></volist></notempty>
+			</dt>
+			<dd class="ellipsis">{$info.brief}</dd>
+		</dl>
+	</div>
+
+	<div class="alizi-detail-content">
+	<php>
+		if(strstr($info['content'],'{[AliziOrder]}')){
+			$info['content'] = explode('{[AliziOrder]}',$info['content']);
+			foreach($info['content'] as $key=>$content){ echo $content;if($key==0){ W('Order',array_merge($_GET,array('page'=>'single_detail','id'=>$info['sn'])));} }
+		}else{
+			echo $info['content'];
+		}
+	</php>
+	</div>
+	
+	<include file="Order/footbar" />
+</div>
+<include file="Order/weixinShare" />
+</block>

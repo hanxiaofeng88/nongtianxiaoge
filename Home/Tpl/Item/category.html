@@ -1,0 +1,73 @@
+<include file="Item:header" />
+
+<div class="container clearfix">
+	<div class="side-menu screen-height">
+		<div class="menu">
+			<a data-id="0" href="{:U('Item/category')}" <empty name="_GET.id">class="active"</empty>>{:lang('all_category')}</a>
+			<volist name="category" id="vo">
+			<a data-id="{$vo.id}" href="{:U('Item/category',array('id'=>$vo['sn']))}" <eq name="vo.id" value="$_GET['id']">class="active"</eq>>{$vo.name}</a>
+			</volist>
+		</div>
+	</div>
+	<div class="main-content screen-height">
+		<ul id="category-list">
+			<volist name="list" id="vo">
+			<li>
+				<div class="image"><a href="{:U('Item/order',array('id'=>$vo['id']))}" title="{$vo.name}"><img data-original="{$vo.image|imageUrl}"></a></div>
+				<div class="description">
+					<p class="list-title">{$vo.name}</p>
+					<notempty name="vo.brief"><p class="list-brief">{$vo.brief}</p></notempty>
+					<p class="list-price">{$vo.price}{:lang('yuan')}</p>
+					<p class="list-buy"><a href="{:U('Item/order',array('id'=>$vo['sn']))}" class="btn">{:lang('view_detail')}</a></p>
+				</div>
+			</li>
+			</volist>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+seajs.use(['jquery'], function($){ 
+height();
+window.onresize = function(){height();}
+function height(){
+	var height = $(window).height();
+	$('.screen-height').height(height-85);
+}
+$(function(){
+	categoryList("{$_GET['id']}","{$_GET['kw']}");
+	$('.menu a').click(function(e){
+		var _this=$(this),id = $(this).attr('data-id'),className='active';
+		_this.addClass(className).siblings().removeClass(className);
+		categoryList(id);
+		e.preventDefault();
+	})
+})
+
+function categoryList(id,kw){
+	$.ajax({
+		type:'get',
+		url:'{:U("Item/getCategoryList")}',
+		data:{id:id,kw:kw},
+		dataType:'json',
+		beforeSend:function(){
+			$('#category-list').html('<li class="category-message"><img src="__PUBLIC__/Alizi/loading.gif" /> {:lang("loading")}</li>');
+		},
+		success:function(data){
+			var list = '';
+			if(data.status==1){
+				for(var i=0;i<data.data.length;i++){
+					var li = data.data[i],brief='',img=li.thumb?li.thumb:li.image;
+					if(li.brief) brief='<p class="list-brief ellipsis">'+li.brief+'</p>';
+					list += '<li><div class="image"><a href="'+li.url+'" title="'+li.name+'"><img src="'+img+'"></a></div><div class="description"><p class="list-title ellipsis">'+li.name+'</p>'+brief+'<p class="list-price">￥'+li.price+'</p><p class="list-buy"><a href="'+li.url+'" class="btn">{:lang("view_detail")}</a></p></div></li>';
+				}
+			}else{
+				list = '<li class="category-message">{:lang("empty")}</li>';
+			}
+			$('#category-list').html(list);
+		}
+	})
+}
+});
+
+</script>
+<include file="Item:footer" />

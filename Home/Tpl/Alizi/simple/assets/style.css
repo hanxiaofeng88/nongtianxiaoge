@@ -1,0 +1,39 @@
+*{margin:0;padding:0;}
+html{height:100%;}
+body{margin:0;padding:0;font:14px/1.5 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", serif;}
+img{max-width:100%;}
+
+.alizi-page{padding:15px;}
+.alizi-brief{margin-bottom:20px;padding-bottom:15px;border-bottom:4px solid #d0d0d0;text-align:center;font-size:1.5rem;}
+
+.alizi-detail-title{background-color:none;border-top:4px solid #d0d0d0;padding:15px 0;height:auto;}
+.alizi-detail-header{height:auto;font-size:1.5rem;border-bottom:none;}
+.alizi-detail-header .title{height:auto;width:30%;margin-right:14px;}
+.alizi-detail-header .title img{height:auto;}
+.alizi-detail-header dt{font-size:1.5rem;}
+.alizi-detail-header dd{font-size:16px;color:#f00;}
+
+.alizi-title{display:none;}
+.alizi-content{padding-top:0;}
+.alizi-theme-simple .alizi-params{padding:1rem;font-size:16px;border-radius:5px;}
+.alizi-params.active, .alizi-params:hover{background-color:#fff !important;color:#f00 !important;}
+.alizi-theme-simple .alizi-params input{display:none;}
+.rows-head{display:none}
+.rows-params{line-height:16px}
+.rows-id-price{margin-bottom:20px;padding-top:15px;padding-bottom:20px;border-bottom:4px solid #d0d0d0;}
+.rows-id-price .rows-head{margin-right:20px !important;display:inline-block !important;font-size:16px;line-height:16px;}
+.alizi-theme-simple select, .alizi-theme-simple .alizi-input-text{padding:0;background:#f8f8f8;border:1px solid #ddd;border-radius:5px;border-image:none;width:100%;height:40px;color:#333;text-indent:1em;font-size:14px}
+select.alizi-region{color: #999 !important;}
+.alizi-id-btn{padding-top:30px;}
+.alizi-id-btn .alizi-btn{border-radius:4px;background-color:#f60;}
+.alizi-border{border-bottom:none;}
+.alizi-foot-nav{display:none;}
+.alizi-detail-wrap{position:relative;padding-bottom:50px !important;overflow:hidden;z-index:10;}
+.alizi-footer-nav{width:100%;margin:0 auto;width: 100%;position: fixed;left: 0;bottom: 0;}
+.alizi-footer-nav ul {margin:0 auto;max-width:750px;height:65px;background-color:#f1f1f1 !important;list-style:none;text-align:center;overflow:hidden;}
+.alizi-footer-nav ul li{float:left;width:40%;background-color:#dd401c;margin:10px 0;height:50px;line-height:50px;border-radius:5px;}
+.alizi-footer-nav ul li a{font-size:18px;color:#fff;}
+.alizi-footer-nav ul li.gotop{background-color:#e8a40b;margin-left:20px;}
+.alizi-footer-nav ul li.booking{float:right;margin-right:20px;}
+.alizi-footer{border-top:1px solid #ccc;padding:10px}
+.alizi-payment a{background-image:none !important;}

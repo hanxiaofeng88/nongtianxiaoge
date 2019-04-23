@@ -1,0 +1,51 @@
+<extend name="Order:alizi" />
+<block name="css">
+<link href="__PUBLIC__/Alizi/pc/alizi.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet">
+<script type="text/javascript">
+seajs.use(['jquery/lazyload'], function() {
+	$(".alizi-lazy").lazyload({ placeholder : "__PUBLIC__/Alizi/alizi.gif",effect : "fadeIn"});
+});
+</script>
+</block>
+<block name="body">
+<include file="Index:header" />
+
+<div class="container">
+	<div class="mainwidth">
+		<div class="meminfo topban"><div class="infoleft "><span class="name">{:lang('item_category')}</span></div></div>
+		<div class="promenu">
+			<div class="cake">
+				<a data-id="0" href="{:U('Index/category')}" <empty name="_GET.id">class="active"</empty>>{:lang('all_category')}</a>
+				<volist name="category" id="vo">
+				<a data-id="{$vo.id}" href="{:U('Index/category',array('id'=>$vo['id']))}" <eq name="vo.id" value="$_GET['id']">class="active"</eq>>{$vo.name}</a>
+				</volist>
+			</div>
+		</div>
+		<div id="product-list">
+			<ul class="prolist" id="alizi-category">
+				<volist name="list" id="vo">
+				<li class="li_on">
+					<div class="img">
+						<a href="{:U('Index/order',array('id'=>$vo['sn']))}" title="{$vo.name}"><img src="{$vo.image|imageUrl}"  class="alizi-lazy"><span></span></a>
+					</div>
+					<span class="textcon">
+						<span class="title">{$vo.name}</span>
+						<span class="price">
+							{:lang('symbol')}{$vo.price}
+							<if condition="floatval($vo['original_price']) gt 0"><del>{:lang('symbol')}{$vo.original_price}</del></if>
+						</span>
+						<span class="text">{$vo.brief}</span>
+						<a href="{:U('Index/order',array('id'=>$vo['sn']))}" title="{$vo.name}" class="line_a">{:lang('detail')}</a>
+					</span>
+				</li>
+				</volist>
+			</ul>
+		</div>
+		<div class="paginal">{$page}</div>
+	</div>
+</div>
+</block>
+
+<block name="foot">
+<include file="Index:footer" />
+</block>

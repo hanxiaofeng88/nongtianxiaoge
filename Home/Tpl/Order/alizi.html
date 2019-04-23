@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head><block name="head">
+<title><empty name="info.name">{$aliziConfig.title}<else />{$info.name}</empty></title>
+<meta charset="utf-8" />
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="apple-touch-fullscreen"/>
+<meta content="telephone=no" name="format-detection"/>
+<link rel="dns-prefetch" href="http://{$_SERVER['SERVER_NAME']}">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no" name="viewport">
+<meta name="description" content="<empty name='info.brief'>{$aliziConfig.description}<else />{$info.brief}</empty>">
+<meta name="keywords" content="<notempty name="info.tags">{:str_replace('#',' ',$info['tags'])}</notempty> {$aliziConfig.keywords}">
+<meta name="author" content="{:lang('author')}">
+<link rel="shortcut icon" href="__PUBLIC__/Assets/img/alizi.ico" />
+<link href="__PUBLIC__/Alizi/alizi-order.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet">
+<!--[if lt IE 9]><link href="__PUBLIC__/Alizi/alizi-ie.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet"><![endif]-->
+<script type="text/javascript" src="__PUBLIC__/Alizi/seajs/seajs/sea.js"></script>
+<script type="text/javascript">
+var aliziHost = "{$aliziHost}",aliziRoot = "{:C('ALIZI_ROOT')}",aliziVersion="{$Think.const.ALIZI_VERSION}-{:C('ALIZI_KEY')}",lang="{:C('DEFAULT_LANG')}";
+seajs.config({ base: '__PUBLIC__/Alizi/seajs/',alias: {'jquery': 'jquery/jquery','alizi': 'alizi/alizi','lang': 'alizi/lang-'+lang}, map: [['.css', '.css?v=' + aliziVersion],['.js', '.js?v=' + aliziVersion]],});
+</script>
+</block><block name="css"></block>
+
+<style>
+.alizi-detail-wrap{max-width:<php>echo $template['width'];</php>;}
+<php>$color = $template['color'];if($color && !in_array(MODULE_NAME,array('Index','Item'))){</php>
+body{background-color:#<php>echo $color['body_bg'];</php>;}
+.alizi-detail-content{padding:<php>echo $template['extend']['padding'];</php>;}
+.alizi-detail-content h2{border-top-color:#<php>echo $color['body_bg'];</php>;}
+.alizi-border,.alizi-side.alizi-full-row{border-color:#<php>echo $color['border'];</php>;}
+.alizi-order{color:#<php>echo $color['font']</php>;background-color:#<php>echo $color['form_bg'];</php>;}
+.alizi-detail-header dt{color:#<php>echo $color['font'];</php>;}
+.alizi-title{background-color:#<php>echo $color['title_bg'];</php>;}
+.alizi-btn,.alizi-btn:hover, .alizi-btn:active,.alizi-badge,.alizi-params.active,.alizi-group-box input:checked + label:after{background-color:#<php>echo $color['button_bg'];</php>;border-color:#<php>echo $color['button_bg'];</php>;}
+.alizi-foot-nav{background-color:#<php>echo $color['nav_bg'];</php>}
+.alizi-group.alizi-params.alizi-checkbox.active:hover{background-color:#<php>echo $color['button_bg'];</php> !important;border-color:#<php>echo $color['button_bg'];</php> !important;color:#fff !important;}
+<php>}</php>
+</style>
+</head>
+<body>
+<notempty name="aliziConfig.notice"><div class="aliziAlert"><a class="close" onclick="$('.aliziAlert').slideUp(500);">×</a>{$aliziConfig.notice}</div></notempty>
+<block name="body"></block>
+<block name="foot"></block>
+</body>
+</html>

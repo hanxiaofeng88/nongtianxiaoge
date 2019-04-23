@@ -1,0 +1,3 @@
+<?php
+//000000000000a:13:{s:2:"id";s:1:"2";s:11:"category_id";s:1:"3";s:4:"name";s:4:"test";s:5:"brief";s:6:"测试";s:4:"tags";s:6:"测试";s:5:"image";s:0:"";s:6:"status";s:1:"1";s:10:"sort_order";s:1:"0";s:7:"content";s:123:"<p><span style="color: rgb(34, 34, 34); font-family: Consolas, " lucida="" courier="" white-space:="">btn-qrcode</span></p>";s:9:"is_delete";s:1:"0";s:9:"is_frozen";s:1:"0";s:11:"update_time";s:10:"1555555269";s:8:"add_time";s:10:"1555555254";}
+?>

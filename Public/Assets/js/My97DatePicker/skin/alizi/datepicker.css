@@ -1,0 +1,59 @@
+/* 
+ * My97 DatePicker 4.8 
+ * Skin:Alizi
+ * Auther:www.010xr.com
+ * Date:2016-02-15
+ */ 
+.WdateDiv{z-index: 9999;display: block;position: relative;width: 260px;padding: 8px;color: #333;background: #fff;border: 1px solid #ccc;border-bottom-color: #bbb;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.WdateDiv2{width:360px;}
+.WdateDiv *{font-size:9pt;}
+.WdateDiv .NavImg a{cursor:pointer;display:block;width:16px;height:16px;margin-top:1px;}
+.WdateDiv .NavImgll a{float:left;background:url(img.gif) no-repeat;}
+.WdateDiv .NavImgl a{float:left;background:url(img.gif) no-repeat -16px 0px;}
+.WdateDiv .NavImgr a{float:right;background:url(img.gif) no-repeat -32px 0px;}
+.WdateDiv .NavImgrr a{float:right;background:url(img.gif) no-repeat -48px 0px;}
+.WdateDiv .yminput{margin-top:2px;text-align:center;border:0;height:20px;width:50px;color:#034c50;background-color:transparent;cursor:pointer}
+.WdateDiv .yminputfocus{margin-top:2px;text-align:center;border:#939393 1px solid;font-weight:bold;color:#034c50;height:20px;width:50px}
+.WdateDiv .menuSel{z-index:1;position:absolute;background-color:#fff;border:#a3c6c8 1px solid;display:none}
+.WdateDiv .menu{cursor:pointer;background-color:#fff;color:#11777c}
+.WdateDiv .menuOn{cursor:pointer;color:#fff;background-color:#3af}
+.WdateDiv .invalidMenu{color:#aaa}
+.WdateDiv .YMenu{margin-top:20px}
+.WdateDiv .MMenu{margin-top:20px;*width:62px}
+.WdateDiv .hhMenu{margin-top:-90px;margin-left:26px}
+.WdateDiv .mmMenu{margin-top:-46px;margin-left:26px}
+.WdateDiv .ssMenu{margin-top:-24px;margin-left:26px}
+.WdateDiv .Wweek{text-align:center;background:#daf3f5;border-right:#bdebee 1px solid}
+.WdateDiv .MTitle{color:#888;font-weight:bold;background-color:#fff}
+.WdateDiv .WdayTable2{border-collapse:collapse;border:#bee9f0 1px solid}
+.WdateDiv .WdayTable2 table{border:0}
+.WdateDiv .WdayTable{line-height:22px;color:#13777e;background-color:#f4f4f4}
+.WdateDiv  td{text-align:center;background:#fff;}
+.WdateDiv .Wday{cursor:pointer;background:#f4f4f4;}
+.WdateDiv .Wwday{cursor:pointer;color:#888;background:#f4f4f4;}
+.WdateDiv .WwdayOn,.WdateDiv .WdayOn{cursor:pointer;color:#fff;background-color:#3af;border-radius:3px}
+.WdateDiv .Wtoday{cursor:pointer;color:blue}
+.WdateDiv .Wselday{color:#fff;background-color:#ff8000;border-radius:3px}
+.WdateDiv .WspecialDay{background-color:#66f4df}
+.WdateDiv .WotherDay{cursor:pointer;color:#888;background:#fff}
+.WdateDiv .WotherDayOn{cursor:pointer;color:#fff;background-color:#ff8000;border-radius:3px}
+.WdateDiv .WinvalidDay{color:#aaa}
+
+.WdateDiv #dpTitle{height:24px;padding:1px;background:#fff;margin-bottom:2px}
+.WdateDiv #dpTime{float:left;margin-top:3px;margin-right:0}
+.WdateDiv #dpTime #dpTimeStr{margin-left:1px;color:#497f7f}
+.WdateDiv #dpTime input{height:20px;width:18px;text-align:center;color:#333;border:#61cad0 1px solid}
+.WdateDiv #dpTime .tB{border-right:0}
+.WdateDiv #dpTime .tE{border-left:0;border-right:0}
+.WdateDiv #dpTime .tm{width:7px;border-left:0;border-right:0}
+.WdateDiv #dpTime #dpTimeUp{height:10px;width:13px;border:0;background:url(img.gif) no-repeat -32px -16px}
+.WdateDiv #dpTime #dpTimeDown{height:10px;width:13px;border:0;background:url(img.gif) no-repeat -48px -16px}
+.WdateDiv #dpQS{float:left;margin-right:3px;margin-top:3px;background:url(img.gif) no-repeat 0 -16px;width:0;height:20px;cursor:pointer}
+.WdateDiv #dpControl{text-align:right;margin-top:3px}
+
+.WdateDiv .dpButton{ height:20px;width:40px;margin:2px 1px;background-color:#33aaff;color:#fff;border-radius:3px;border:none;cursor:pointer;}
+.WdateDiv .dpButton:hover{background-color:#2196ea;}
+
+
+
+

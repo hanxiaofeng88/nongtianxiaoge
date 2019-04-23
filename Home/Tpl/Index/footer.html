@@ -1,0 +1,23 @@
+<div class="footer">
+	<div class="mainwidth">
+		<ul class="footcon">
+			<li>
+				<div class="copyright">{$aliziConfig.footer}</div>
+			</li>
+			<li>
+				<div class="foottel">
+					<span class="tell">全国免费客服电话：<span class="num">{$aliziConfig.contact_tel}</span></span>
+					<notempty name="aliziConfig.contact_qq">
+					<span class="online">{:lang('online_service')}<span class="num"><a href="http://wpa.qq.com/msgrd?v=3&uin={$aliziConfig.contact_qq}&site=qq&menu=yes" target="_blank"><img border="0" src="http://wpa.qq.com/pa?p=2:{$aliziConfig.contact_qq}:51 &amp;r=0.22914223582483828"></a></span></span>
+					<else /><br />
+					</notempty>
+				</div>
+				
+			</li>
+		</ul>
+	</div>
+</div>
+<div id="aliziUp"></div>
+<script type="text/javascript">
+seajs.use(['jquery/scrollup'], function(){ $.scrollUp({scrollName: 'aliziUp'}); });
+</script>

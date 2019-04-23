@@ -1,0 +1,16 @@
+<include file="Item:header" />
+<div class="newmain background">
+	<h4 class="newtitle">{:lang('articleList')}</h4>
+	<dl class="search_form">
+		<ul class="article-list">
+		<volist name="list" id="vo">
+			<li>
+				<h3 class="title"><a href="{:U('Item/detail',array('id'=>$vo['id']))}" title="{$vo.name}">{$vo.name}</a></h3>
+				<span class="text">{$vo.brief|nl2br}</span>
+			</li>
+		</volist>
+		</ul>
+		<div class="paginal">{$page}</div>	
+	</dl>
+</div>
+<include file="Item:footer" />

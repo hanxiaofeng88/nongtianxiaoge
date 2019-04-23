@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="apple-touch-fullscreen"/>
+<meta content="telephone=no" name="format-detection"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no" name="viewport">
+<meta name="MobileOptimized" content="640">
+<title>{:lang('shipping_query')}</title>
+</head>
+<body>
+<style>
+*{margin:0;padding:0;font-size:12px;}
+.title { background: #7d4707; border: #ccc 1px solid; height: 28px; line-height: 28px; color: #FFFFFF; font-weight: bold; text-indent: 15px }
+.nobg { border: 1px solid #ddd; font-size: 12px; line-height: 22px; padding: 3px 5px; vertical-align: top }
+</style>
+<div class="wrap">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="showtablecontext">
+		<thead>
+		<tr>
+			<td width="27%" class="title" onclick="sortToggle()" style="cursor:pointer"><span class="b-btn"><b class="b-up b-up-active" id="b-up"></b><b class="b-down" id="b-down"></b></span>{:lang('time')}</td>
+			<td width="73%" class="title">{:lang('address')}</td>
+		</tr>
+		</thead>
+		<tr><td colspan="2"><p style="padding:5px;text-align:left;font-size:14px;font-weight:bold;color:#7d4707">{$name}：{$_GET['order']}</p></td></tr>
+		<tbody id="list">
+		<tr><td colspan=2><p style="padding:30px;text-align:center;"><img src="__PUBLIC__/Assets/img/waiting.gif" /></p></td></tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Assets/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var id = '{$_GET["id"]}';
+	var order = '{$_GET["order"]}';
+	$.ajax({
+		url:'__SELF__',
+		type:'post',
+		data:{id:id,order:order},
+		dataType:'json',
+		success:function(data){
+			var tr = '';
+			if(data.errCode=='0'){
+				var list = data.data;
+				for(var i=0;i<list.length;i++){
+					var li = list[i];
+					tr += '<tr><td class="nobg">'+li.time+'</td><td class="nobg">'+li.content+'</td></tr>';
+				}
+			}else{
+				tr = '<tr><td colspan=2><p style="padding:20px;text-align:center;">查无信息</p></td></tr>';
+			}
+			$('#list').html(tr);
+			console.log(data);
+		}
+	})
+})
+</script>
+
+</body>
+</html>

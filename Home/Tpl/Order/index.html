@@ -1,0 +1,39 @@
+<extend name="alizi" />
+<block name="body">
+<div class="alizi-order-wrap clearfix">
+{:W('Order',array_merge($_GET,array('page'=>'single')))}
+<script type="text/javascript">
+seajs.use(['alizi','jquery/form','lang'],function(alizi){
+	window.alizi = alizi;
+	
+	alizi.quantity(0);
+	var btnSubmit = $('.alizi-submit');
+	$('#aliziForm').ajaxForm({
+		cache: true,
+		timeout: 50000,
+		dataType: 'json',
+		error:function(){ layer.closeAll(); alert(lang.ajaxError); btnSubmit.attr('disabled',false).val(lang.submit); },
+		beforeSubmit:function(){
+			if(checkForm('#aliziForm')==false) return false;
+			layer.closeAll();layer.load();
+			btnSubmit.attr('disabled',true).val(lang.loading);
+		},
+		success:function(data){
+			layer.closeAll();layer.closeAll();
+			if(data.status=='1'){
+				var redirect = "{:U('Order/pay',array('order_no'=>'__orderNo__'))}";
+				top.window.location.href = redirect.replace('__orderNo__',data.data.order_no);
+			}else{
+				btnSubmit.attr('disabled',false).val(lang.submit);
+				layer.msg(data.info);
+			}
+		}
+	});
+});
+if(self!=top){
+	height();window.onresize=function(){height();}
+	function height(){ try{var height=parseInt(document.body.clientHeight);parent.window.document.getElementById("aliziIframe").height = height;}catch (ex){console.log(ex);}}
+}
+</script>	
+</div>
+</block>

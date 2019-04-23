@@ -1,0 +1,38 @@
+<extend name="Order:alizi" />
+<block name="body">
+<div class="result">
+    <div class="innner">
+        <div class="order" style="min-height: calc(100vh - 244px);">
+            <div class="succtop">
+				<span class="text">请在菜单中选择【在浏览器中打开】<br>以继续完成支付操作</span>
+			</div>
+			<div class="succtop">
+				<div class="qrcode"><img src="__PUBLIC__/Alizi/wxpay.png" /></div>
+			</div>
+        </div>
+        <div class="foot">
+            <a href="{$order.url}" class="foot_btn">{:lang('goback')}</a>
+			<p>{$aliziConfig.footer}</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+seajs.use(['jquery'],function(jquery){
+	var order_id = "{$order['id']}";
+	$.ajax({ url:"{:U('Api/send')}",timeout:100,data:{order_id:order_id} });
+	setInterval(query,1500);
+});
+function query(){
+	var order_no = "{$order.order_no}";
+	$.ajax({
+		url:'{:U("Order/orderQuery")}',
+		type:'get',
+		data:{order_no:order_no},
+		dataType:'json',
+		success:function(data){
+			if(data.status=='1'){ window.location.href="{:U('Order/result',array('order_no'=>$order['order_no']))}";}
+		}
+	})
+}
+</script>	
+</block>

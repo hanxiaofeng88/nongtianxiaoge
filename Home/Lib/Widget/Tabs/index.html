@@ -1,0 +1,42 @@
+
+<notempty name="data">
+<div class="tabs newmain background">
+	<php>$width = 100/count($data);</php>
+	<nav class="clearfix tabs-nav">
+		<volist name="data" id="vo">
+		<a href="javascript:;" <eq name='i' value='1'>class="active"</eq> style="width:{$width}%;"><span>{$vo.name}</span></a>
+		</volist>
+	</nav>
+	<nav class="clearfix tabs-main">
+		<volist name="data" id="li">
+		<dl class="list3" <eq name='i' value='1'>style="display:block"</eq> >
+			<empty name="li.data">
+				<dt class="data-empty">暂无内容...</dt>
+			<else />
+				<volist name="li.data" id="vo">
+				<dd class="alizi-item-list"> 
+					<a href="{:U('Item/order',array('id'=>$vo['sn']))}" title="{$vo.name}" class="info"> 
+						<div class="img"><img  src="<empty name="vo.thumb">{$vo.image|imageUrl}<else />{$vo.thumb|imageUrl}</empty>" class="lazy"></div>
+					</a>
+					<div class="clear"></div>
+					<div class="newmain_text">
+					<h5 class="ellipsis">{$vo.name}</h5>
+					<em><strong>{$vo.price}</strong>{:lang('yuan')}</em>
+					</div>
+				</dd>
+				</volist>
+			</empty>
+		</dl>
+		</volist>
+	</nav>
+</div>
+<script type="text/javascript">
+seajs.use(['jquery'], function($){
+	$('.tabs-nav a').click(function(){
+		var _this = $(this),index = _this.index();
+		_this.addClass('active').siblings('a').removeClass('active');
+		$('.tabs-main dl').eq(index).fadeIn(500).siblings('dl').hide();
+	})
+});
+</script>
+</notempty>

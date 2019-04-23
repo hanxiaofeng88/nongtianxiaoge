@@ -1,0 +1,62 @@
+<extend name="Order:alizi" />
+<block name="css">
+<link href="__PUBLIC__/Alizi/pc/alizi.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet">
+</block>
+<block name="body">
+<include file="Index:header" />
+
+<div class="container">
+		<div class="mainwidth">
+			<div class="cartconbox cartconbox_1">
+				
+				<div class="succtop">
+					<span class="text">
+						<notempty name="options">
+							{:lang('order_info')}
+						<else />
+							{:lang('paymentSubmit')}
+						</notempty>
+					</span>
+				</div>
+				
+				<div class="protipscon">
+					<div class="protips_in">
+						<span class="title">{:lang('order_info')}</span>
+						<ul class="text">
+							<notempty name="order.status">
+							<li><label>{:lang('order_status_colon')}</label><span><php>$status=C('ORDER_STATUS');</php>{$status[$order['status']]}</span></li>
+							</notempty>
+							<li><label>{:lang('order_number_colon')}</label><span>{$order.order_no}</span></li>
+							<li><label>{:lang('item_name_colon')}</label><span>{$order.item_name}</span></li>
+							<volist name="options" id="name">
+							<php>if(in_array($name,array('verify'))){continue;}</php>
+							<li>
+								<label>{:lang($name.'_colon')}</label>
+								<span>
+									<switch name="name">
+										<case value="price"><b>{$order['total_price']}{:lang('yuan')}</b></case>
+										<case value="payment"><php>$payment = C('PAYMENT');echo $payment[$order[$name]]['name'];</php></case>
+										<default />{$order[$name]}
+									</switch>
+								</span>
+							</li>
+							</volist>
+						</ul>
+					</div>
+				</div>
+				<div class="btn-group"> <a href="{$order.url}" class="booking-now">{:lang('goback')}</a></div>
+				
+			</div>
+		</div>
+    </div>
+<script type="text/javascript">
+seajs.use(['jquery'],function($){
+	var order_id = "{$order['id']}";
+	$.ajax({ url:"{:U('Api/send')}",timeout:100,data:{order_id:order_id} });
+});
+</script>	
+</block>
+
+<block name="foot">
+<include file="Index:footer" />
+</block>

@@ -1,0 +1,17 @@
+<extend name="Order:alizi" />
+<block name="body">
+<div class="result">
+	<h1>{:lang('404 Not Found')}</h1>
+    <div class="innner order_div success">
+        <div class="order" style="min-height: calc(100vh - 244px);">
+            <ul>
+				<li><p style="padding:20px 0;text-align:center;color:#f60;font-weight:bold;">{:lang('404 Not Found')}</p></li>	
+			</ul>
+        </div>
+        <div class="foot">
+            <a href="{$aliziHost}" class="foot_btn">{:lang('goback')}</a>
+			<p>{$aliziConfig.footer}</p>
+        </div>
+    </div>
+</div>
+</block>

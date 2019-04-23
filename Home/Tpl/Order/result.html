@@ -1,0 +1,50 @@
+<extend name="Order:alizi" />
+<block name="body">
+<div class="result">
+	<h1><empty name="order.status"><img src="__PUBLIC__/Alizi/success.png"> {:lang('order_submit_success')}<else />{:lang('order_info')}</empty></h1>
+    <div class="innner order_div success">
+        <div class="order" style="min-height: calc(100vh - 244px);">
+            <ul>
+				<notempty name="order.status">
+				<li><label>{:lang('order_status_colon')}</label><span><php>$status=C('ORDER_STATUS');</php>{$status[$order['status']]}</span></li>
+				</notempty>
+				<li><label>{:lang('order_number_colon')}</label><span>{$order.order_no}</span></li>
+				<li><label>{:lang('item_name_colon')}</label><span>{$order.item_name}</span></li>
+				<notempty name="options">
+				<volist name="options" id="name">
+					<php>if(in_array($name,array('verify'))){continue;}</php>
+					<li>
+						<label>{:lang($name.'_colon')}</label>
+						<span>
+							<switch name="name">
+								<case value="price"><b>{$order['total_price']}{:lang('yuan')}</b></case>
+								<case value="payment"><php>$payment = C('PAYMENT');echo $payment[$order[$name]]['name'];</php></case>
+								<default />{$order[$name]}
+							</switch>
+						</span>
+					</li>
+					</volist>
+					<eq name="order.status" value="3">
+						<php>$item = M('Item')->where('id='.$order['item_id'])->field('is_auto_send,send_content')->find();</php>
+						<notempty name="item.is_auto_send">
+						<li>
+							<label>{:lang('info_colon')}</label>
+							<span><pre style="margin-top:0;color:#f00;">{$item.send_content}</pre></span>
+						</li>
+						</notempty>
+					</eq>
+				<else />
+					<li>{:lang('paymentSubmit')}</li>	
+				</notempty>
+			</ul>
+        </div>
+        <div class="foot">
+            <a href="{$redirectUrl}" class="foot_btn">{:lang('goback')}</a>
+			<p>{$aliziConfig.footer}</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+seajs.use(['jquery'],function($){ var order_id = "{$order['id']}";$.ajax({ url:"{:U('Api/send')}",timeout:100,data:{order_id:order_id} });});
+</script>
+</block>

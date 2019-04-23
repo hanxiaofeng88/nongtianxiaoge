@@ -1,0 +1,35 @@
+<extend name="Order:alizi" />
+<block name="css">
+<link href="__PUBLIC__/Alizi/pc/alizi.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet">
+</block>
+<block name="body">
+<include file="Index:header" />
+
+<div class="container">
+	<div class="mainwidth">
+		<div class="cartconbox cartconbox_1">
+			
+			<div class="succtop">
+				<span class="text">{:lang('order_submit_success')}</span>
+				<span class="text_1">{:lang('order_number_colon')}{$order.order_no}</span>
+				<span class="text_1" style="margin-left:20px;">{:lang('order_price_colon_symbol')}{$order.total_price}</span>
+			</div>
+			
+			<div class="succweixin">
+				<div class="code_img"><img src="{$qrcode|imageUrl}" ></div>
+			</div>
+			<div class="btn-group"> <a href="{$order.url}" class="booking-now">{:lang('goback')}</a></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+seajs.use(['jquery'],function($){
+	var order_id = "{$order['id']}";
+	$.ajax({ url:"{:U('Api/send')}",timeout:100,data:{order_id:order_id} });
+});
+</script>
+</block>
+
+<block name="foot">
+<include file="Index:footer" />
+</block>

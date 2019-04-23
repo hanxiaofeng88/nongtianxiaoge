@@ -1,0 +1,18 @@
+
+	<div class="newmain footer">{$aliziConfig.footer}</div>
+	<div class="clear ptop"></div>
+	<notempty name="aliziConfig.show_bottom_nav">
+	<div class="nav2">
+		<li><a href="{:U('/')}"><span><img src="__PUBLIC__/Alizi/Item/icon-home.png"></span><p>{:lang('index')}</p></a></li>
+		<li><a href="{:U('Item/category')}"><span><img src="__PUBLIC__/Alizi/Item/icon-menu.png"></span><p>{:lang('item_category')}</p></a></li>
+		<li><a href="{:U('Item/query')}"><span><img src="__PUBLIC__/Alizi/Item/icon-newspaper.png"></span><p>{:lang('order_query')}</p></a></li>
+		<li>
+			<a href="{:U('Item/article')}"><span><img src="__PUBLIC__/Alizi/Item/icon-newspaper.png"></span><p>{:lang('articleList')}</p></a>
+		</li>
+	</div>
+	</notempty>
+<script type="text/javascript">
+seajs.use(['jquery/scrollup'], function(){ $.scrollUp({scrollName: 'aliziUp'}); });
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<extend name="Order:alizi" />
+<block name="css">
+<link href="__PUBLIC__/Alizi/pc/alizi.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet">
+</block>
+<block name="body">
+<include file="Index:header" />
+
+<div class="mainwidth">
+	<h4 class="meminfo"><div class="infoleft "><span class="name">{:lang('order_query')}</span></div></h4>
+	<div class="alizi-query-wrap">
+		<dl class="query_form">
+			<form action="{:U('Order/query')}" method="post" id="aliziForm" class="clearfix">
+				<input name="kw" required="required" class="query_text" type="text" placeholder="{:lang('mobile_/_order_number')}">
+				<input type="submit" id="alizi-query-btn" class="query_button" value="{:lang('order_query')}">
+			</form>
+			<div class="query_result" id="alizi-query-result"></div>
+		</dl>
+	</div>
+</div>
+
+<script id="alizi-query" type="text/html">
+<ul>
+    {{each list as value i}}
+        <li>
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<th>{:lang('order_colon')}{{value.order_no}}</th>
+					<th width="80">{:lang('status')}</th>
+					<th width="100">{:lang('quantity_price')}</th>
+					<th width="150">{:lang('booking_time')}</th>
+				</tr>
+				<tr>
+					<td>
+						<h2>{{value.title}}</h2>
+						{{#value.itemExtends}}
+						{{if value.address}}{:lang('delivery_address_colon')}{{value.address}}{{/if}}
+						{{if value.express}}<p>{:lang('express_query_colon')}{{#value.express}}</p>{{/if}}
+					</td>
+					<td>
+						{{value.status}}
+						{{if value.order_status=='0' && value.payment!='1' && value.payment!='6'}}
+						<p><a href="{:C('ALIZI_ROOT')}index.php?m=Order&a=pay&order_no={{value.order_no}}" class="links" target="_blank">[{:lang('pay')}]</a></p>
+						{{/if}}
+					</td>
+					<td>{{value.quantity}}/<span class="price">{{value.price}}{:lang('yuan')}</span></td>
+					<td>{{value.time}}</td>
+				</tr>
+			</table>
+		</li>
+    {{/each}}
+</ul>
+</script>
+<script type="text/javascript">
+seajs.use(['alizi','jquery/form','art/template'],function(alizi,form,template){
+	$('#aliziForm').ajaxForm({
+		timeout: 50000,
+		dataType: 'json',
+		error:function(){  layer.closeAll(); alert(lang.ajaxError); },
+		beforeSubmit:function(){ layer.closeAll();layer.load(); },
+		success:function(data){
+			layer.closeAll();
+			if(data.status=='1'){
+			console.log(data.data);
+				var html = template('alizi-query', data.data);
+				document.getElementById('alizi-query-result').innerHTML = html;
+			}else{ 
+				layer.msg(data.info);
+				document.getElementById('alizi-query-result').innerHTML = "<div class='alizi-rows'>"+data.info+"</div>";
+			}
+		}
+	});
+});
+function delivery(order,id){
+	var url = "{:C('ALIZI_ROOT')}index.php?m=Index&a=delivery&order="+order+"&id="+id+"&ord=asc&show=json",title="{:lang('shipping_query')}";
+	layer.open({type: 2,shade: .2,shadeClose: true,title: title,area: ['600px', '60%'],content:url}); 
+}
+</script>
+</block>
+
+<block name="foot">
+<include file="Index:footer" />
+</block>

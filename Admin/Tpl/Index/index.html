@@ -1,0 +1,100 @@
+{:W("Main",array('module'=>MODULE_NAME,'action'=>ACTION_NAME))}
+<div class="layout-main">    
+    <div class="layout-block-header box overview-head">
+        <h2 class="overview-username">{$_SESSION.user.username}{:lang('comma_hello')}</h2>
+        <div id="OverviewOptimizeAdvice" style="line-height:2em;padding-top:10px;">
+            <p>{:lang('last_login_time_colon')}{$_SESSION.user.login_time}</p>
+            <p>{:lang('last_login_ip_colon')}{$_SESSION.user.login_ip}</p>
+			<p>当前版本：{:C('ALIZI_VERSION')}</p>
+			<p>短信余额：<b class="alert" id="sms-balance">0</b></p>
+			<!--p><a class="btn btn-ok" href="{:U('Version/update')}">系统升级</a></p-->
+        </div>
+    </div>
+	<!--
+	<div class="layout-block-header box overview-head">
+        <h2 class="overview-username">阿狸子声明</h2>
+        <div id="OverviewOptimizeAdvice" style="font-size:14px;line-height:1.8em;padding-top:10px;">
+            <p>1、PHP订单管理系统，作者：<b></b>（旺旺号），
+				淘宝店铺：<a href="/" target="_blank"></a>，
+				官方网址：<a href="http://www.010xr.com/" target="_blank">www.010xr.com</a>
+			</p>
+			<p>2、在使用过程中，若发现bug或需要添加功能，请联系作者。</p>
+			<p>3、本系统仅供自己使用，禁止传播和倒卖！</p>
+        </div>
+    </div>
+	-->
+	
+	<div class="box clear-fix">   
+        <div class="ui-table">
+            <div class="ui-table-body ui-table-body-hover">
+                <table cellpadding="0" cellspacing="0" width="100%" >
+                    <thead>
+                        <tr class="ui-table-head">
+                            <th class="ui-table-hcell">今日统计</th>
+							<volist name="today" id="vo">
+                            <th class="ui-table-hcell">{$vo.name}</th>
+							</volist>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>数量</td>
+							<volist name="today" id="vo">
+                            <td>{$vo.quantity|intval}</td>
+							</volist>
+                        </tr>
+						<tr>
+                            <td>金额</td>
+                            <volist name="today" id="vo">
+                            <td>{$vo.price|number_format=2}</td>
+							</volist>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+	</div><!--.box-->
+	
+	<div class="box clear-fix">   
+        <div class="ui-table">
+            <div class="ui-table-body ui-table-body-hover">
+                <table cellpadding="0" cellspacing="0" width="100%" >
+                    <thead>
+                        <tr class="ui-table-head">
+                            <th class="ui-table-hcell">昨日统计</th>
+							<volist name="yesterday" id="vo">
+                            <th class="ui-table-hcell">{$vo.name}</th>
+							</volist>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>数量</td>
+							<volist name="yesterday" id="vo">
+                            <td class="ui-table-hcell">{$vo.quantity|intval}</td>
+							</volist>
+                        </tr>
+						<tr>
+                            <td>金额</td>
+                            <volist name="yesterday" id="vo">
+                            <td class="ui-table-hcell">{$vo.price|number_format=2}</td>
+							</volist>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+	</div><!--.box-->
+<script type="text/javascript">
+$(function(){
+	$.ajax({
+	   type: "GET",
+	   url: "{:U('Index/smsBalance')}",
+	   dataType: "json",
+	   success:function(data){
+			$('#sms-balance').html(data.data);
+		}
+	 });
+})
+</script>
+	{:W("Foot")}

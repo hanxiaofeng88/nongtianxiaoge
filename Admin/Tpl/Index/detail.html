@@ -1,0 +1,28 @@
+<extend name="Order:alizi" />
+<block name="css">
+<link href="__PUBLIC__/Alizi/pc/alizi.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet">
+</block>
+<block name="body">
+<include file="Index:header" />
+			
+<div class="container">
+	<div class="mainwidth">
+		
+		<div class="storyhead">
+			<a <empty name="_GET.id">class="active"</empty> href="{:U('Index/article')}"><span>{:lang('all_category')}</span></a>
+			<volist name="category" id="vo">
+			<a <eq name="vo.id" value="$info.category_id">class="active"</eq> href="{:U('Index/article',array('id'=>$vo['id']))}" title="{$vo.name}"><span>{$vo.name}</span></a>
+			</volist>
+		</div>
+		
+		<div class="alizi-detail-wrap clearfix">
+			<h1 class="article-title">{$info.name}</h1>
+			<div class="article-content">{$info.content}</div>
+		</div>
+	</div>
+</div>
+</block>
+
+<block name="foot">
+<include file="Index:footer" />
+</block>

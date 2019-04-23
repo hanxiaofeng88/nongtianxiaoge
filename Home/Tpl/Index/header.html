@@ -1,0 +1,42 @@
+<div class="header">
+	<div class="mainwidth">
+		<div class="headtop">
+			<span class="place cur_city_name">
+				<form action="{:U('Index/category')}" method="get" class="search_form">
+					<input type="text" name="kw" class="search_input" placeholder="{:lang('item_search')}" value="{$_GET['kw']}" />
+					<input type="submit" value="" class="search_button">
+					<input type="hidden" name="m" value="Index" class="search_button">
+					<input type="hidden" name="a" value="category" class="search_button">
+				</form>
+			</span>
+			
+			<div class="topright">
+				<a href="{:U('Item/index')}" class="phone">{:lang('themeMobile')}</a>
+				<!--
+				<empty name="_SESSION['member']['username']">
+				<a href="{:U('User/login')}" class="member">{:lang('login')}</a>
+				<else />
+				<a href="{:U('User/index')}" class="member">{$_SESSION['member']['username']}</a>
+				<a href="{:U('User/logout')}" class="logout">[{:lang('logout')}]</a>
+				</empty>
+				<a href="/checkout/cartList.html" class="cart">购物车(<span id="cartCount">0</span>)</a>
+				-->
+			</div>
+			
+		</div>
+		<div class="logobox">
+			<a href="{$aliziHost}" class="logo">
+				<img title="{$aliziConfig.title}" alt="{$aliziConfig.title}" src="<empty name='aliziConfig.logo_pc'>__PUBLIC__/Alizi/pc/logo.png<else />{$aliziConfig.logo_pc|imageUrl}</empty>">
+			</a>
+		</div>
+		<div class="nav">
+			<ul>
+				<li <eq name='ACTION_NAME' value='index'>class="active"</eq>><a href="{$aliziHost}"><span data-hover="{:lang('index')}">{:lang('index')}</span></a></li>
+				<li class="li_2 <eq name='ACTION_NAME' value='category'>active</eq>"><a href="{:U('Index/category')}"><span data-hover="{:lang('item_category')}">{:lang('item_category')}</span></a></li>
+				<li <eq name='ACTION_NAME' value='query'>class="active"</eq>><a href="{:U('Index/query')}"><span data-hover="{:lang('order_query')}">{:lang('order_query')}</span></a></li>
+				<li <eq name='ACTION_NAME' value='article'>class="active"</eq>><a href="{:U('Index/article')}"><span data-hover="{:lang('article')}">{:lang('article')}</span></a></li>
+			</ul>
+		</div>
+		
+	</div>
+</div>

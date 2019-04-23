@@ -1,0 +1,65 @@
+<include file="Item:header" />
+<div class="newmain background">
+	<h4 class="newtitle">{:lang('order_query')}</h4>
+	<dl class="search_form">
+		<form action="{:U('Order/query')}" method="post" id="aliziForm">
+			<input name="kw" required="required" class="search_text" type="text" placeholder="{:lang('mobile_/_order_number')}">
+			<input type="submit" class="search_btn" id="alizi-query-btn" value="{:lang('query')}">
+		</form>
+		<div class="clear query_result search_result" id="alizi-query-result"></div>
+	</dl>
+</div>
+<script id="alizi-query" type="text/html">
+<ul>
+    {{each list as value i}}
+        <li>
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<th>{:lang('order_colon')}{{value.order_no}}</th>
+				</tr>
+				<tr>
+					<td>
+						<h2>{{value.title}}</h2>
+						{{#value.itemExtends}}
+						{{if value.address}}{:lang('delivery_address_colon')}{{value.address}}{{/if}}
+						{{if value.express}}<p>{:lang('express_query_colon')}{{#value.express}}</p>{{/if}}
+						<p>
+							{:lang('order_status_colon')}{{value.status}}
+							{{if value.order_status=='0' && value.payment!='1' && value.payment!='6'}}
+							<a href="{:C('ALIZI_ROOT')}index.php?m=Order&a=pay&order_no={{value.order_no}}" class="links" target="_blank">[{:lang('pay')}]</a>
+							{{/if}}
+						</p>
+						<p>{:lang('quantity_price_colon')}{{value.quantity}}/<span class="price">{{value.price}}{:lang('yuan')}</span></p>
+						<p>{:lang('booking_time_colon')}{{value.time}}</p>
+					</td>
+				</tr>
+			</table>
+		</li>
+    {{/each}}
+</ul>
+</script>
+<script type="text/javascript">
+seajs.use(['alizi','jquery/form','art/template'],function(alizi,form,template){
+	$('#aliziForm').ajaxForm({
+		timeout: 50000,
+		dataType: 'json',
+		error:function(){  layer.closeAll(); alert(lang.ajaxError); },
+		beforeSubmit:function(){ layer.closeAll();layer.load(); },
+		success:function(data){
+			layer.closeAll();
+			if(data.status=='1'){
+				var html = template('alizi-query', data.data);
+				document.getElementById('alizi-query-result').innerHTML = html;
+			}else{ 
+				layer.msg(data.info);
+				document.getElementById('alizi-query-result').innerHTML = "<div class='alizi-rows'>"+data.info+"</div>";
+			}
+		}
+	});
+});
+function delivery(order,id){
+	var url = "{:C('ALIZI_ROOT')}index.php?m=Index&a=delivery&order="+order+"&id="+id+"&ord=asc&show=json",title="{:lang('shipping_query')}";
+	layer.open({type: 2,shade: .2,shadeClose: true,title: title,area: ['600px', '60%'],content:url}); 
+}
+</script>
+<include file="Item:footer" />

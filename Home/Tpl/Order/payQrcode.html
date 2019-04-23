@@ -1,0 +1,27 @@
+<extend name="Order:alizi" />
+<block name="body">
+<div class="result">
+	<h1>{:lang('order_submit_success')}</h1>
+    <div class="innner">
+        <div class="order" style="min-height: calc(100vh - 244px);">
+            <div class="succtop">
+				<span class="text">{:lang('order_number_colon')}{$order.order_no}</span>
+				<span style="margin-left:20px;">{:lang('order_price_colon_symbol')}<b class="price">{$order.total_price}</b></span>
+			</div>
+			<div class="succtop">
+				<div class="qrcode"><img src="{$qrcode|imageUrl}" ></div>
+			</div>
+        </div>
+        <div class="foot">
+            <a href="{$order.url}" class="foot_btn">{:lang('goback')}</a>
+			<p>{$aliziConfig.footer}</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+seajs.use(['jquery'],function($){
+	var order_id = "{$order['id']}";
+	$.ajax({ url:"{:U('Api/send')}",timeout:100,data:{order_id:order_id} });
+});
+</script>
+</block>

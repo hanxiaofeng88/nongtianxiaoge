@@ -1,0 +1,20 @@
+<include file="Item:header" />
+<notempty name="slider">
+<div class="newbanner">
+  <div class="newflexslider">
+    <ul class="newslides">
+		<volist name="slider" id="vo">
+		<li><a href="{$vo.link}" target="{$vo.target}"><img src="{$vo.image|imageUrl}" /></a></li>
+		</volist>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+seajs.use(['jquery/newflexslider'], function(){ $('.newflexslider').newflexslider({ directionNav: true, pauseOnAction: false });});
+</script>
+</notempty>
+ 
+{:W('Item',$hot)}
+{:W('Tabs',array('status'=>$aliziConfig['item_category_show'],'id'=>$aliziConfig['item_category_id'],'num'=>$aliziConfig['item_category_num']))}
+
+<include file="Item:footer" />

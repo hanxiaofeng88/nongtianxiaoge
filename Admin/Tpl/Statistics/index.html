@@ -1,0 +1,56 @@
+{:W("Main",array('module'=>MODULE_NAME,'action'=>ACTION_NAME))}
+<script type="text/javascript" src="__PUBLIC__/Assets/js/My97DatePicker/WdatePicker.js"></script>
+<div class="layout-main">    
+    <div id="breadclumb" class="box">
+        <h3><strong>{:lang('breadclumb_colon')}</strong>{:lang(MODULE_NAME)}<span></span>{:lang('order_statistics')}</h3>
+    </div>
+    <div id="CooperationMain" class="box clear-fix">   
+        <div class="layout-block-header">
+            <form action="__SELF__" method="get" id="searchform">
+            	<input type="hidden" name="s" value="{$Think.const.MODULE_NAME}" />
+				<input type="hidden" name="a" value="{$Think.const.ACTION_NAME}" />
+                <label>{:lang('search_colon')}</label>
+				<input type="text" name="start" value="{$_GET['start']|trim}" size="11" class="ui-text Wdate" onclick="WdatePicker();">
+				至
+				<input type="text" name="end" value="{$_GET['end']|trim}" size="11" class="ui-text Wdate" onclick="WdatePicker();">
+                <button type="submit" class="btn btn-ok">{:lang('search')}</button>
+            </form>
+        </div>
+        
+		<form action="{:U('Article/todo')}" method="post" id="deleteform">
+        <div class="ui-table">
+            <div class="ui-table-body ui-table-body-hover">
+                <table cellpadding="0" cellspacing="0" width="100%" >
+                    <thead>
+                        <tr class="ui-table-head">
+                            <th class="ui-table-hcell" width="150">{:lang('name')}</th>
+							<volist name="status" id="vo">
+                            <th class="ui-table-hcell">{$vo}</th>
+							</volist>
+                            <th class="ui-table-hcell" width="100">总计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist name="list" id="vo">
+                        <tr id="row-{$vo.item_id}">
+                            <td><a href="{:U('Order/index',array('item_id'=>$vo['item_id']))}">{$vo.item_name}</a></td>
+                            <volist name="vo.status" id="li">
+								<td>
+									<b class="alert">{$li.quantity|intval}</b>
+									<p>{$li.price|number_format=2}</p>
+								</td>
+							</volist>
+							<td>
+								<b class="alert">{$vo.quantity}</b>
+								<p>{$vo.total_price}</p>
+							</td>
+                        </tr>
+                        </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+		
+		</form>
+</div><!--.box-->
+{:W("Foot")}   

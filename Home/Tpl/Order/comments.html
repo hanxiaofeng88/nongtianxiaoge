@@ -1,0 +1,29 @@
+<php>
+$comments = array(
+	'张先生：是真皮的，皮料柔软，穿着舒服。',
+	'薛先生：尺码标准，按平常穿皮鞋尺码选刚刚好。',
+	'高宝国：有头层牛皮的质感，柔软透气，穿起来效果不错！',
+	'陈超盖：价格很实惠，比实体店买的质量还好。',
+	'杨吴用：朋友正好是懂皮的，看过摸过说确实是头层牛皮的，橡胶底质地也不错。',
+	'温骏义：材质不错，是真皮的，有质感，蛮好搭配裤子的，尺码标准皮鞋码，很合脚',
+	'周小姐：给老公买的，呵呵刚好到外地还好赶上了，很好，很满意！',
+	'杨文斌：又是一次快乐的购物，无论大小还是颜色都非常满意，物美价廉。',
+	'李丽：男朋友很喜欢！',
+);shuffle($comments);
+</php>
+<div id="alizi-comments">
+   <ul class="list">
+	<volist name="comments" id="vo">
+	<li class="<if condition='$i%2==0'>l<else />r</if>">
+		<div class="text">{$vo}</div>
+		<span class="corner"></span>
+		<span class="avatar"></span>
+	</li>
+	</volist>
+	</ul>
+</div>	
+<script type="text/javascript">
+seajs.use(['alizi'],function(alizi){
+	alizi.scroll('alizi-comments',3000);
+});
+</script>

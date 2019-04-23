@@ -1,0 +1,68 @@
+<extend name="Order:alizi" />
+<block name="css">
+<link href="__PUBLIC__/Alizi/pc/alizi.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet">
+<script type="text/javascript">
+seajs.use(['jquery/lazyload'], function() {
+	$(".alizi-lazy").lazyload({ placeholder : "__PUBLIC__/Alizi/alizi.gif",effect : "fadeIn"});
+});
+</script>
+</block>
+<block name="body">
+<div class="pbody">
+	<include file="Index:header" />
+
+
+<div class="container">
+	<div class="mainwidth">
+		
+		<notempty name="slider">
+		<div class="newbanner">
+		  <div class="newflexslider">
+			<ul class="newslides">
+				<volist name="slider" id="vo">
+				<li><a href="{$vo.link}" target="{$vo.target}"><img src="{$vo.banner|imageUrl}" /></a></li>
+				</volist>
+			</ul>
+		  </div>
+		</div>
+		<script type="text/javascript">
+		seajs.use(['jquery/newflexslider'], function(){ $('.newflexslider').newflexslider({ directionNav: true, pauseOnAction: false });});
+		</script>
+		</notempty>
+
+
+	<notempty name="hot.list">
+	<div class="indprocon">
+		<div class="toptitle">
+			<span class="titlein"><strong>{:lang('newArrival')} / <span class="en">New Products</span></strong></span>
+		</div>
+		
+		<ul class="indprolist">
+			<volist name="hot.list" id="vo">
+			<li>
+				<div class="img">
+				<a href="{:U('Index/order',array('id'=>$vo['sn']))}">
+					<img src="{$vo.image|imageUrl}" class="alizi-lazy"><span></span>
+				</a>
+				</div>
+				<a href="{:U('Index/order',array('id'=>$vo['sn']))}" class="title ellipsis" title="{$vo.name}">{$vo.name}</a>
+				<span class="price">
+					{:lang('symbol')}{$vo.price}
+					<if condition="floatval($vo['original_price']) gt 0"><del>{:lang('symbol')}{$vo.original_price}</del></if>
+				</span>
+				<span class="text">{$vo.brief}</span>
+			</li>
+			</volist>
+		</ul>
+	</div>
+	</notempty>
+
+</div>
+    </div>
+<div id="downArrowBox"></div>
+</div>
+</block>
+
+<block name="foot">
+<include file="Index:footer" />
+</block>

@@ -1,0 +1,26 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^id/(\w+).html$ index.php?m=Index&a=order&id=$1 [L]
+RewriteRule ^query.html$ index.php?m=Index&a=query [L]
+RewriteRule ^category.html$ index.php?m=Index&a=category [L]
+RewriteRule ^category-([0-9]+).html$ index.php?m=Index&a=category&id=$1 [L]
+RewriteRule ^article.html$ index.php?m=Index&a=article [L]
+RewriteRule ^article-([0-9]+).html$ index.php?m=Index&a=article&id=$1 [L]
+RewriteRule ^detail-([0-9]+).html$ index.php?m=Index&a=detail&id=$1 [L]
+
+RewriteRule ^single/(\w+).html$ index.php?m=Order&a=index&id=$1 [L]
+RewriteRule ^single/(\w+)-([0-9]+).html$ index.php?m=Order&a=index&id=$1&uid=$2 [L]
+RewriteRule ^detail/(\w+).html$ index.php?m=Order&a=index&tpl=detail&id=$1 [L]
+RewriteRule ^detail/(\w+)-([0-9]+).html$ index.php?m=Order&a=index&tpl=detail&id=$1&uid=$2 [L]
+
+RewriteRule ^result/([0-9]+).html$ index.php?m=Index&a=result&order_no=$1 [L]
+RewriteRule ^pay-([0-9]+).html$ index.php?m=Index&a=pay&order_no=$1 [L]
+
+RewriteRule ^single/(\w+)/(\w+)/(\w+).html$ index.php?m=Order&a=index&id=$1 [L]
+RewriteRule ^single/(\w+)-([0-9]+)/(\w+)/(\w+).html$ index.php?m=Order&a=index&id=$1&uid=$2 [L]
+RewriteRule ^detail/(\w+)/(\w+)/(\w+).html$ index.php?m=Order&a=index&tpl=detail&id=$1 [L]
+RewriteRule ^detail/(\w+)-([0-9]+)/(\w+)/(\w+).html$ index.php?m=Order&a=index&tpl=detail&id=$1&uid=$2 [L]
+
+RewriteRule ^(.*).html$ index.php/$1 [QSA,PT,L]

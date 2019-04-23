@@ -1,0 +1,124 @@
+{:W("Main",array('module'=>MODULE_NAME,'action'=>ACTION_NAME,'do'=>$_GET['do']))}
+
+<div class="layout-main">    
+    <div id="breadclumb" class="box">
+        <h3><strong>{:lang('breadclumb_colon')}</strong>{:lang(MODULE_NAME)}<span></span>{:lang('database_manage')}</h3>
+    </div>
+    <div id="CooperationMain" class="box clear-fix">   
+		<div class="layout-block-header"><h2>{:lang('database_manage')}</h2></div>
+		<ul class="ui-tab-group">
+			<li class="active"><q>数据库备份</q></li>
+			<li <eq name="i" value="1"> class="active"</eq>><q>数据库恢复</q></li>
+		</ul>
+        
+		<div class="tabs-block">
+			<form action="{:U('Setting/databaseBackup')}" method="post" id="backupForm">
+			<div class="ui-table">
+				<div class="ui-table-body ui-table-body-hover">
+					<table cellpadding="0" cellspacing="0" width="100%" >
+						<thead>
+							<tr class="ui-table-head">
+								<th class="ui-table-hcell" width="20"><input type="checkbox" id="check_box" onclick="$.Select.All(this,'id[]');" ></th>
+								<th class="ui-table-hcell">表名</th>
+								<th class="ui-table-hcell" width="120">类型</th>
+								<th class="ui-table-hcell" width="120">编码</th>
+								<th class="ui-table-hcell" width="120">记录数</th>
+								<th class="ui-table-hcell" width="120">数据长度</th>
+							</tr>
+						</thead>
+						<tbody>
+							<volist name="list" id="vo">
+							<tr id="row-{$vo.id}">
+								<td><input type="checkbox" name="id[]" value="{$vo.Name}" onclick="$.Select.This(this);"></td>
+								<td>{$vo.Name}</td>
+								<td>{$vo.Engine}</td>
+								<td>{$vo.Collation}</td>
+								<td><empty name="vo.Auto_increment">{$vo.Rows}<else />{$vo.Auto_increment}</empty></td>
+								<td><php>echo ceil($vo['Data_length']/1024);</php>KB</td>
+							</tr>
+							</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			  
+			<div class="ui-pager-bar clearfix" style="padding-left:10px;">
+				<div class="float-left">
+					<input type="hidden" name="model" value="{$Think.MODULE_NAME}">
+					<input type="checkbox" id="check_box" onclick="$.Select.All(this,'id[]');" >选择/反选 
+					<input type="submit" value="开始备份" class="btn btn-ok">
+				</div>
+				<div class="ui-pager" style="float:right">{$page}</div>
+			</div>
+			
+			</form>
+		</div>	
+		
+		<div class="tabs-block">
+			<form action="{:U('Setting/databaseDelete')}" method="post" id="deleteForm">
+				<div class="ui-table">
+					<div class="ui-table-body ui-table-body-hover">
+						<table cellpadding="0" cellspacing="0" width="100%" >
+							<thead>
+								<tr class="ui-table-head">
+									<th class="ui-table-hcell" width="20"><input type="checkbox" id="check_box" onclick="$.Select.All(this,'id[]');" ></th>
+									<th class="ui-table-hcell">文件名称</th>
+									<th class="ui-table-hcell" width="120">文件大小</th>
+									<th class="ui-table-hcell" width="120">备份时间</th>
+									<th class="ui-table-hcell" width="120">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="sql" id="vo">
+								<tr id="row-{$vo.id}">
+									<td><input type="checkbox" name="id[]" value="{$vo.name}" onclick="$.Select.This(this);"></td>
+									<td>{$vo.name}</td>
+									<td>{$vo.size}KB</td>
+									<td>{$vo.time}</td>
+									<td>
+										<q onclick="importConfirm('{$vo.name}')">恢复</q>
+									</td>
+								</tr>
+								</volist>
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+				<div class="ui-pager-bar clearfix" style="padding-left:10px;">
+					<div class="float-left">
+						<input type="checkbox" id="check_box" onclick="$.Select.All(this,'id[]');" >选择/反选 
+						<input type="button" name="delete" value="删除备份" class="btn btn-ok" onclick="delConfirm()">
+					</div>
+					<div class="ui-pager" style="float:right">{$page}</div>
+				</div>
+			</form>
+		</div>
+	</div><!--.box-->
+<script type="text/javascript">
+$(function(){
+	$('#CooperationMain').tabs({tabsContents:".tabs-block"});	
+})
+function delConfirm(){
+	$.confirm('是否要删除备份？',function(){ 
+		$('#deleteForm').submit();
+	},true)
+}
+function importConfirm(file){
+	var loading = $('#ajaxLoading');
+	$.confirm('此操作有风险！<br />是否确认要恢复？',function(){ 
+		$.ajax({
+			type:'get',
+			url:"{:U('Setting/databaseImport')}",
+			data:{file:file},
+			dataType:'json',
+			beforeSend:function(){ loading.show();},
+			success:function(data){
+				loading.hide();
+				$.alert(data.info);
+			}
+		})
+	},true)
+}
+</script>
+{:W("Foot")}   

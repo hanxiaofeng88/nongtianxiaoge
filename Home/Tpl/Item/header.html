@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><notempty name="info.name">{$info.name} -</notempty> {$aliziConfig.title}</title>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="apple-touch-fullscreen"/>
+<meta content="telephone=no" name="format-detection"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no" name="viewport">
+<meta name="MobileOptimized" content="640">
+<meta name="description" content="<notempty name="info.brief">{$info.brief}<else />{$aliziConfig.description}</notempty>">
+<meta name="keywords" content="<notempty name="info.name">{$info.name}|</notempty>{$aliziConfig.keywords}">
+<meta name="author" content="{:lang('author')}">
+<link rel="shortcut icon" href="__PUBLIC__/Assets/img/alizi.ico" />
+<link href="__PUBLIC__/Alizi/Item/style.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Alizi/seajs/seajs/sea.js"></script>
+<script type="text/javascript">
+var aliziHost = "{$aliziHost}",aliziRoot = "{:C('ALIZI_ROOT')}",lang="{:C('DEFAULT_LANG')}";
+seajs.config({ base: '__PUBLIC__/Alizi/seajs/',alias: {'jquery': 'jquery/jquery','alizi': 'alizi/alizi','lang': 'alizi/lang-'+lang}});
+seajs.use(['jquery'], function($){ 
+$('.search_button').click(function(){ $('.search_submit').show(); $('.search_input').show().animate({width:'100%'}).focus();})
+$('.search_input').blur(function(){ $(this).animate({width:'0'},500,function(){ $(this).hide();$('.search_submit').hide();}); })
+});
+</script>
+<notempty name="aliziConfig.theme_color">
+<style> 
+	.header,.btn{background-color: #<php>echo $aliziConfig['theme_color'];</php>;}
+	.tabs-nav a.active {color:#<php>echo $aliziConfig['theme_color'];</php>;border-bottom-color:#<php>echo $aliziConfig['theme_color'];</php>;}
+	.side-menu a.active{border-left-color:#<php>echo $aliziConfig['theme_color'];</php>;}
+	.btn-buy,.alizi-foot-nav{background-color:#<php>echo $aliziConfig['theme_color'];</php> !important;}
+</style>
+</notempty>
+</head>
+
+<body class="{$aliziConfig.system_theme}">
+<notempty name="aliziConfig.notice"><div class="aliziAlert"><a class="close" onclick="$('.aliziAlert').slideUp(500);">×</a>{$aliziConfig.notice}</div></notempty>
+<notempty name="aliziConfig.show_header">
+<div class="header">
+	<div class="back"><a href="javascript:history.go(-1)"><img src="__PUBLIC__/Alizi/Item/goback.png"></a></div> 
+	<div class="wrap">
+		<a class="logo" href="{:U('Item/index')}"><img src="<empty name='aliziConfig.logo'>__PUBLIC__/Assets/img/logo.png<else />{$aliziConfig.logo|imageUrl}</empty>" alt="{$aliziConfig.title}" /></a>
+	</div>
+	<div class="search">
+		<form method="get" action="{:U('Item/category')}" class="searchform">
+			<input type="hidden" name="m" value="Item">
+			<input type="hidden" name="a" value="category">
+			<input type="text" name="kw" class="search_input" value="{$_GET['kw']|trim}" placeholder="{:lang('search')}">
+			<button type="button" class="search_button"></button>
+			<button type="submit" class="search_submit"></button>
+		</form>
+	</div> 
+</div>
+
+<else />
+<style>.tab_menu{top:0;}</style>
+</notempty>
+

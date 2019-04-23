@@ -1,0 +1,69 @@
+{:W("Main",array('module'=>MODULE_NAME,'action'=>ACTION_NAME,'do'=>$_GET['do']))}
+
+<div class="layout-main">    
+    <div id="breadclumb" class="box">
+        <h3><strong>{:lang('breadclumb_colon')}</strong>{:lang(MODULE_NAME)}<span></span>{:lang('item_list')}</h3>
+    </div>
+    <div id="CooperationMain" class="box clear-fix">   
+        <div class="layout-block-header">
+            <form action="__SELF__" method="get" id="searchform">
+            	<input type="hidden" name="s" value="{$Think.const.MODULE_NAME}" />
+				<input type="hidden" name="a" value="{$Think.const.ACTION_NAME}" />
+                <label>{:lang('search_colon')}</label>
+                <input type="text" name="keyword" value="{$_GET['keyword']|trim}" class="ui-text" autocomplete="off" size="40">
+				<select name="category_id">
+					<option value="0">{:lang('select_category')}</option>
+					<volist name="category" id="vo">
+					<option value="{$vo.id}" <eq name="_GET.category_id" value="$vo.id">selected='selected'</eq>>{$vo.name}</option>
+					</volist>
+				</select>
+                <button type="submit" class="btn btn-ok">{:lang('search')}</button>
+            </form>
+        </div>
+        
+		<form action="{:U('Item/todo')}" method="post" id="deleteform">
+        <div class="ui-table">
+            <div class="ui-table-body ui-table-body-hover">
+                <table cellpadding="0" cellspacing="0" width="100%" >
+                    <thead>
+                        <tr class="ui-table-head">
+                            <th class="ui-table-hcell">{:lang('name')}</th>
+                            <th class="ui-table-hcell">{:lang('category')}</th>
+                            <th class="ui-table-hcell" width="80">{:lang('price')}</th>
+                            <th class="ui-table-hcell" width="50">{:lang('package')}</th>
+							<th class="ui-table-hcell" width="50">{:lang('status')}</th>
+                            <th class="ui-table-hcell" width="120">{:lang('time')}</th>
+                            <th class="ui-table-hcell" width="180">{:lang('action')}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist name="list" id="vo">
+                        <tr id="row-{$vo.id}">
+                            <td>
+								{$vo.name}
+								<notempty name="vo.image"><a href="{$vo.image|imageUrl}" title="{:lang('image')}" target="_blank"><img src="__PUBLIC__/Assets/img/pic.jpg" /></a></notempty>
+								<eq name="vo.is_hot" value="1"> <img src="__PUBLIC__/Assets/img/hot.gif" /></eq>
+							</td>
+                            <td>{$vo.category_id|getFields="Category","name",###}</td>
+                            <td>{$vo.price}{:lang('yuan')}</td>
+                            <td>{$vo.params|json_decode=true|count}</td>
+                            <td>{$vo.status|status="image"}</td>
+                            <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+                            <td class="action">
+                                <a target="_blank" href="{$vo.url.order}">模板一</a> | 
+								<a target="_blank" href="{$vo.url.detail}">模板二</a>
+                            </td>
+                        </tr>
+                        </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+          
+        <div class="ui-pager-bar clearfix" style="padding-left:10px;">
+			<div class="ui-pager" style="float:right">{$page}</div>
+		</div>
+		
+		</form>
+</div><!--.box-->
+{:W("Foot")}   

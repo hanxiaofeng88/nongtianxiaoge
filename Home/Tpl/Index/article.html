@@ -1,0 +1,42 @@
+<extend name="Order:alizi" />
+<block name="css">
+<link href="__PUBLIC__/Alizi/pc/alizi.css?v={$Think.const.ALIZI_VERSION}" rel="stylesheet">
+<script type="text/javascript">
+seajs.use(['jquery/lazyload'], function() {
+	$(".alizi-lazy").lazyload({ placeholder : "__PUBLIC__/Alizi/alizi.gif",effect : "fadeIn"});
+});
+</script>
+</block>
+<block name="body">
+<include file="Index:header" />
+
+<div class="container">
+	<div class="mainwidth">
+		
+		<div class="storyhead">
+			<a <empty name="_GET.id">class="active"</empty> href="{:U('Index/article')}" title="{:lang('all_category')}"><span>{:lang('all_category')}</span></a>
+			<volist name="category" id="vo">
+			<a <eq name="vo.id" value="$_GET['id']">class="active"</eq> href="{:U('Index/article',array('id'=>$vo['id']))}" title="{$vo.name}"><span>{$vo.name}</span></a>
+			</volist>
+		</div>
+		
+		
+		<div class="storycon">
+			<ul class="processlist">
+				<volist name="list" id="vo">
+				<li>
+					<notempty name="vo.image"><a href="{:U('Index/detail',array('id'=>$vo['id']))}" class="image-box" title="{$vo.name}"><img class="img" alt="{$vo.name}" src="{$vo.image|imageUrl}"></a></notempty>
+					<h3 class="title"><a href="{:U('Index/detail',array('id'=>$vo['id']))}" title="{$vo.name}">{$vo.name}</a></h3>
+					<span class="text">{$vo.brief|nl2br}</span>
+				</li>
+				</volist>
+			</ul>
+		</div>
+		<div class="paginal">{$page}</div>	
+	</div>
+</div>
+</block>
+
+<block name="foot">
+<include file="Index:footer" />
+</block>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link href="__PUBLIC__/Assets/css/esui.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Assets/css/union.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Assets/js/jquery.form.js"></script>
+</head>
+<body>
+<div class="layout-main">    
+    <div class="box clear-fix">
+	<div class="info-block">
+		<form method="post" action="{:U('Shipping/edit')}" id="ajaxform" enctype="multipart/form-data">
+		<table class="info-table">
+			<tbody>
+				<tr>
+					<th width="150">{:lang('shipping_name_colon')}</th>
+					<td><input type="text" name="name" class="ui-text validate[required]" value="{$info.name}"></td>
+				</tr>
+				
+				<tr>
+					<th>{:lang('默认运费_colon')}</th>
+					<td>
+						<input type="text" name="less_num" size="2" class="ui-text validate[required]" value="{$info.less_num}">件内
+						<input type="text" name="less_num_cost" size="2" class="ui-text validate[required]" value="{$info.less_num_cost}">元；每增加
+						<input type="text" name="step_num" size="2" class="ui-text validate[required]" value="{$info.step_num}">件，运费增加
+						<input type="text" name="step_num_cost" size="2" class="ui-text validate[required]" value="{$info.step_num_cost}">元。
+					</td>
+				</tr>
+				<tr>
+					<th>{:lang('免邮设置_colon')}</th>
+					<td>
+						<p><input type="checkbox" value="1" name="is_free_num" <notempty name="info.is_free_num">checked</notempty>> 满 <input type="text" name="free_num" size="5" class="ui-text" value="{$info.free_num}"> 件包邮。</p>
+						<p><input type="checkbox" value="1" name="is_free_cost" <notempty name="info.is_free_cost">checked</notempty>> 满 <input type="text" name="free_cost" size="5" class="ui-text" value="{$info.free_cost}"> 元包邮。</p>
+					</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td>
+						<notempty name="_GET.id"><input type="hidden" name="id" value="{$_GET.id}" /></notempty>
+						<input type="submit"class="btn btn-ok" value="保存" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+	</div>
+
+    </div><!--.box-->
+
+<link href="__PUBLIC__/Assets/js/validation/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Assets/js/validation/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Assets/js/validation/jquery.validationEngine-zh_CN.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	$("form").validationEngine('attach', {promptPosition : "centerRight", autoPositionUpdate : true});	
+	var page = "{$_GET['page']}";
+	$('#ajaxform').ajaxForm({
+        timeout: 5000,
+        error:function(){alert("服务超时");},
+        success:function(data){ 
+            if(data.status==1){
+				if(page=='1'){
+					alert(data.info);
+					parent.window.location.reload(); 
+				}else{
+					var opt = data.data;
+					parent.$('#shipping_id').append('<option value="'+opt.id+'">'+opt.name+'</option>');
+					parent.$.alert(data.info,data.status);
+					$.dialog.get('Open').close();
+				}
+            }else{
+				parent.$.alert(data.info,data.status);
+			}
+        },
+        dataType: 'json'
+    });
+})
+</script>	 
+</body>
+</html>

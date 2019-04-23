@@ -1,0 +1,84 @@
+{:W("Main",array('module'=>MODULE_NAME,'action'=>ACTION_NAME))}
+
+<div class="layout-main">    
+    <div id="breadclumb" class="box">
+        <h3><strong>{:lang('breadclumb_colon')}</strong>{:lang(MODULE_NAME)}<span></span>{:lang('item_list')}</h3>
+    </div>
+    <div id="CooperationMain" class="box clear-fix">   
+        <div class="layout-block-header">
+            <form action="__SELF__" method="get" id="searchform">
+            	<input type="hidden" name="s" value="{$Think.const.MODULE_NAME}" />
+				<input type="hidden" name="a" value="{$Think.const.ACTION_NAME}" />
+                <label>{:lang('search_colon')}</label>
+                <input type="text" name="keyword" value="{$_GET['keyword']|trim}" class="ui-text" autocomplete="off" size="40">
+				<select name="category_id">
+					<option value="0">{:lang('select_category')}</option>
+					<volist name="category" id="vo">
+					<option value="{$vo.id}" <eq name="_GET.category_id" value="$vo.id">selected='selected'</eq>>{$vo.name}</option>
+					</volist>
+				</select>
+                <button type="submit" class="btn btn-ok">{:lang('search')}</button>
+            </form>
+        </div>
+        
+		<form action="{:U('Article/todo')}" method="post" id="deleteform">
+        <div class="ui-table">
+            <div class="ui-table-body ui-table-body-hover">
+                <table cellpadding="0" cellspacing="0" width="100%" >
+                    <thead>
+                        <tr class="ui-table-head">
+                            <th class="ui-table-hcell" width="20"><input type="checkbox" id="check_box" onclick="$.Select.All(this,'id[]');" ></th>
+                            <th class="ui-table-hcell" width="50">{:lang('sortOrder')}</th>
+                            <th class="ui-table-hcell">{:lang('name')}</th>
+                            <th class="ui-table-hcell">{:lang('category')}</th>
+                            <th class="ui-table-hcell" width="120">{:lang('time')}</th>
+                            <th class="ui-table-hcell" width="180">{:lang('action')}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist name="list" id="vo">
+                        <tr id="row-{$vo.id}">
+                            <td><input type="checkbox" name="id[]" value="{$vo.id}" onclick="$.Select.This(this);"></td>
+                            <td><input type="text" class="ui-text" size="2" name="sort_order[{$vo.id}]" value="{$vo.sort_order}"></td>
+                            <td>
+								<a href="{:C('ALIZI_ROOT')}?m=Index&a=detail&id={$vo.id}" target="_blank">{$vo.name}</a>
+								<notempty name="vo.image"><a href="{$vo.image|imageUrl}" title="{:lang('image')}" target="_blank"><img src="__PUBLIC__/Assets/img/pic.jpg" /></a></notempty>
+								<eq name="vo.is_hot" value="1"> <img src="__PUBLIC__/Assets/img/hot.gif" /></eq>
+							</td>
+                            <td>{$vo.category_id|getFields="Category","name",###}</td>
+                            <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+                            <td class="action">
+                                <a href="{:U('Article/'.ACTION_NAME,array('do'=>'edit','id'=>$vo['id']))}">{:lang('edit')}</a> |
+								<empty name="vo.is_frozen">
+								<q onclick="javascript:Delete('{$vo.id}','{:U('Article/proccess/',array('do'=>'delete','id'=>$vo['id']))}')">{:lang('delete')}</q>
+								<else />
+								<q class="grey">{:lang('delete')}</q>
+								</empty>
+                            </td>
+                        </tr>
+                        </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+          
+        <div class="ui-pager-bar clearfix" style="padding-left:10px;">
+			<div class="float-left">
+				<input type="hidden" name="model" value="{$Think.MODULE_NAME}">
+				<input type="checkbox" id="check_box" onclick="$.Select.All(this,'id[]');" >选择/反选 
+				<input type="button" name="delete" value="批量删除" class="btn" onclick="delConfirm()">
+				<input type="submit" name="sort" value="批量排序" class="btn btn-ok">
+			</div>
+			<div class="ui-pager" style="float:right">{$page}</div>
+		</div>
+		
+		</form>
+</div><!--.box-->
+<script type="text/javascript">
+function delConfirm(){
+	$.confirm('是否要删除？',function(){ 
+		$('#deleteform').submit();
+	},true)
+}
+</script>
+{:W("Foot")}   
