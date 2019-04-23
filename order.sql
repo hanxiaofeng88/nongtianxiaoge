@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2019-04-23 10:14:03
+Date: 2019-04-23 15:55:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -186,18 +186,19 @@ CREATE TABLE `alizi_item` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `sn` (`sn`),
   KEY `title` (`name`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='产品表-alizi.net';
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='产品表-alizi.net';
 
 -- ----------------------------
 -- Records of alizi_item
 -- ----------------------------
-INSERT INTO `alizi_item` VALUES ('1', '1', '1uaXmYzy', '1', '古早味黑糖沙琪玛', '纯手工制作 始于1984年的味道', '推荐#传统手工制作', '0.00', '1.00', '15', '1', '请打开微信二维码扫描支付', '/201510/562ccb2b073b2.png', '/201509/5608077d63901.jpg', '', '1', '0', '0', '0', '[{\"title\":\"\\u9ed1\\u7cd6\\u6c99\\u742a\\u739b\",\"price\":\"12\",\"image\":\"\",\"qrcode\":\"\\/201510\\/562ccb2b073b2.png\"},{\"title\":\"\\u7ea2\\u7cd6\\u6c99\\u742a\\u739b\",\"price\":\"15\",\"image\":\"\",\"qrcode\":\"\\/201510\\/562ccb2b073b2.png\"}]', 'radio', '', '[{\"title\":\"\\u9009\\u62e9\\u989c\\u8272\",\"value\":\"\\u7ea2\\u8272#\\u767d\\u8272#\\u7d2b\\u8272\",\"type\":\"radio\"}]', '<p>\r\n	<img alt=\"\" src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135822_53493.jpg\"/><img alt=\"\" src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135826_20535.jpg\"/><img alt=\"\" src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135829_32518.jpg\"/> </p><p>{[AliziOrder]}<br/></p>', '', '0', '', '0', '0', '0', '', 'null', '0', '1466693614', '1443181406');
+INSERT INTO `alizi_item` VALUES ('1', '2', '1uaXmYzy', '1', '古早味黑糖沙琪玛', '纯手工制作 始于1984年的味道', '推荐#传统手工制作', '0.00', '1.00', '19', '1', '请打开微信二维码扫描支付', '/201904/5cbeb68b3ae74.jpg', '/201509/5608077d63901.jpg', '', '1', '0', '0', '0', '[{\"title\":\"\\u7ea2\\u7cd6\\u6c99\\u742a\\u739b\",\"price\":\"15\",\"image\":\"\",\"qrcode\":\"\\/201904\\/5cbeb68b3ae74.jpg\"}]', 'radio', '', '[{\"title\":\"\\u9009\\u62e9\\u989c\\u8272\",\"value\":\"\\u7ea2\\u8272#\\u767d\\u8272#\\u7d2b\\u8272\",\"type\":\"radio\"}]', '<p>\r\n	<img alt=\"\" src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135822_53493.jpg\"/><img alt=\"\" src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135826_20535.jpg\"/><img alt=\"\" src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135829_32518.jpg\"/> </p><p>{[AliziOrder]}<br/></p>', '', '0', '', '0', '0', '0', '', 'null', '0', '1556002468', '1443181406');
 INSERT INTO `alizi_item` VALUES ('2', '1', '2uaXmYzy', '2', '东港杏仁夹心海苔', '台湾风味 香脆可口 小朋友最爱', '纯天然#香脆可口', '0.00', '0.01', '65', '0', '请使用微信扫描二维码进行支付<br>这是说明信息', '/201510/562ce2f947edd.png', '/201509/56080d00b7b11.jpg', '/201509/56080d00b7b11.jpg', '1', '0', '0', '0', '[{\"title\":\"250g\\u5305\\u88c5\",\"price\":\"10\",\"image\":\"\",\"qrcode\":\"\\/201510\\/562ce2f947edd.png\"},{\"title\":\"500g\\u5305\\u88c5\",\"price\":\"20\",\"image\":\"\",\"qrcode\":\"\\/201510\\/562ce2f947edd.png\"}]', 'radio', '', '[{\"title\":\"\\u5957\\u9910\\u9009\\u62e9\",\"value\":\"\\u301001\\u3011\\u9177\\u777f\\u9ed1#\\u301002\\u3011\\u72c2\\u91ce\\u6a59#\\u301003\\u3011\\u4f18\\u96c5\\u767d#\\u301004\\u3011\\u9999\\u69df\\u91d1\",\"type\":\"radio\"}]', '<p>\r\n	<img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135936_37956.jpg\" alt=\"\"/><img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135945_51764.jpg\" alt=\"\"/><img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135950_61870.jpg\" alt=\"\"/> </p><h2>\r\n	订购说明</h2><p>{[AliziOrder]}</p>', '', '0', '', '0', '0', '0', '这是自动发货内容\r\nwww.010xr.com', 'null', '3600', '1464066860', '1443368205');
 INSERT INTO `alizi_item` VALUES ('3', '1', 'u3aXmYzy', '1', '补气血黑糖玫瑰四物', '台湾进口-调经补血-四物饮', '推荐#满100元免运费', '0.00', '23.00', '9', '0', '', '', '/201509/56080e15a27f3.jpg', '', '1', '0', '0', '0', '[]', 'radio', '', '[{\"title\":\"\\u9009\\u62e9\\u989c\\u8272\",\"value\":\"\\u7ea2\\u8272#\\u767d\\u8272#\\u7d2b\\u8272\",\"type\":\"checkbox\"}]', '<p>\r\n	<img alt=\"\" src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140114_75095.jpg\"/> </p><p>\r\n	<br/></p><p>\r\n	<img alt=\"\" src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140110_73688.jpg\"/><img alt=\"\" src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140120_41243.jpg\"/> </p><p>\r\n	<span>&nbsp;{[AliziOrder]}</span> </p>', '', '0', '', '0', '0', '1', 'alizi.net\r\n这是自动发货信息\r\n\r\n', 'null', '86500', '1464067026', '1443368471');
 INSERT INTO `alizi_item` VALUES ('4', '1', '4uaXmYzy', '2', '2015年新货 吐鲁番野生黑桑椹干', '2015新货 特级黑桑葚子 新疆特产', '新疆特产#天然食品', '0.00', '32.00', '0', '0', '', '', '/201509/56081c9aae76b.jpg', '', '1', '0', '0', '0', '[]', 'radio', '', '', '<p>\r\n	<img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140507_52499.jpg\" alt=\"\"/><img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140516_25149.jpg\" alt=\"\"/><img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140524_14560.jpg\" alt=\"\"/> </p><p>\r\n	&nbsp;{[AliziOrder]}</p>', '', '0', '', '0', '0', '0', '', 'null', '0', '1464067125', '1443372198');
 INSERT INTO `alizi_item` VALUES ('5', '1', '5uaXmYzy', '2', '和田大马士革玫瑰花', '无任何加工 药用品质', '满100元免运费#25元起售', '0.00', '25.00', '1291', '0', '', '/201510/562ce2f947edd.png', '/201509/56081cbf499f2.jpg', '', '1', '0', '0', '0', '[]', 'radio', '', '[{\"title\":\"\\u5fae\\u4fe1\\u6635\\u79f0\",\"value\":\"\\u6ce8\\u610f\\u662f\\u3010\\u5fae\\u4fe1\\u6635\\u79f0\\u3011\\u800c\\u4e0d\\u662f\\u5fae\\u4fe1\\u8d26\\u53f7\",\"type\":\"text\"}]', '<p><br/></p><h2>商品描述</h2><p>\r\n	<img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135602_46221.jpg\" alt=\"\"/> </p><p>\r\n	<br/></p><p>\r\n	<img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135620_39002.jpg\" alt=\"\"/> </p><p>\r\n	<br/></p><p>\r\n	<img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010135720_94870.jpg\" alt=\"\"/> </p><p><br/></p><h2>在线下单</h2><p>\r\n	{[AliziOrder]}</p>', '', '0', '\r\n<script src=\"http://hm.baidu.com/hm.js?58d0df5a2df91e0d74f6d2b371edebda\"></script>', '0', '0', '0', '自动发货\r\nwww.010xr.com', 'null', '0', '1466670235', '1443372229');
-INSERT INTO `alizi_item` VALUES ('6', '2', '6uaXmYzy', '1', '阿克苏温185纸皮核桃sms', '2015新货 个大壳薄 无任何添加', '原味生核桃#限时抢购', '0.00', '55.00', '19', '0', '', '', '/201509/56081cda457b4.jpg', '', '1', '0', '0', '0', '[{\"title\":\"\\u9999\\u69df\\u91d1\",\"price\":\"50\",\"image\":\"\",\"qrcode\":\"\"},{\"title\":\"\\u5496\\u5561\\u8272\",\"price\":\"100\",\"image\":\"\",\"qrcode\":\"\"}]', 'radio', '', '[{\"title\":\"\\u5c3a\\u7801\",\"value\":\" S\\/165\\uff08\\u9002\\u5408100\\u65a4-125\\u65a4\\uff09# M\\/170\\uff08\\u9002\\u5408125\\u65a4-140\\u65a4\\uff09# L\\/175\\uff08\\u9002\\u5408140\\u65a4-155\\u65a4\\uff09#XL\\/180\\uff08\\u9002\\u5408155\\u65a4-170\\u65a4\\uff09\",\"type\":\"checkbox\"},{\"title\":\"\\u989c\\u8272\",\"value\":\"\\u7ea2\\u8272#\\u767d\\u8272#\\u7d2b\\u8272\",\"type\":\"radio\"},{\"title\":\"\\u5f71\\u7247\\u7f16\\u53f7\",\"value\":\"\",\"type\":\"text\"}]', '<p>\n	<span style=\"color:#333333;font-family:Arial, Helvetica, sans-serif，, 宋体;line-height:25px;background-color:#FFFFFF;\">&nbsp;<a href=\"#aliziOrder\" class=\"alizi-btn\">立即下单</a><img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140356_49453.jpg\" alt=\"\"/><img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140409_83321.jpg\" alt=\"\"/><img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140415_33013.jpg\" alt=\"\"/></span> </p><p>{[AliziOrder]}</p><p><br/></p>', '', '0', '', '0', '0', '0', '', 'null', '800', '1555555362', '1443372259');
+INSERT INTO `alizi_item` VALUES ('6', '2', '6uaXmYzy', '1', '阿克苏温185纸皮核桃sms1', '2015新货 个大壳薄 无任何添加', '原味生核桃#限时抢购', '66.00', '55.00', '21', '0', '', '', '/201509/56081cda457b4.jpg', '', '1', '0', '0', '0', '[{\"title\":\"\\u9999\\u69df\\u91d1\",\"price\":\"540\",\"image\":\"\",\"qrcode\":\"\"},{\"title\":\"\\u5496\\u5561\\u8272\",\"price\":\"100\",\"image\":\"\",\"qrcode\":\"\"}]', 'radio', '', '[{\"title\":\"\\u5c3a\\u7801\",\"value\":\" S\\/165\\uff08\\u9002\\u5408100\\u65a4-125\\u65a4\\uff09# M\\/170\\uff08\\u9002\\u5408125\\u65a4-140\\u65a4\\uff09# L\\/175\\uff08\\u9002\\u5408140\\u65a4-155\\u65a4\\uff09#XL\\/180\\uff08\\u9002\\u5408155\\u65a4-170\\u65a4\\uff09\",\"type\":\"checkbox\"},{\"title\":\"\\u989c\\u8272\",\"value\":\"\\u7ea2\\u8272#\\u767d\\u8272#\\u7d2b\\u8272\",\"type\":\"radio\"},{\"title\":\"\\u5f71\\u7247\\u7f16\\u53f7\",\"value\":\"\",\"type\":\"text\"}]', '<p>\n	<span style=\"color:#333333;font-family:Arial, Helvetica, sans-serif，, 宋体;line-height:25px;background-color:#FFFFFF;\">&nbsp;<a href=\"#aliziOrder\" class=\"alizi-btn\">立即下单</a><img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140356_49453.jpg\" alt=\"\"/><img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140409_83321.jpg\" alt=\"\"/><img src=\"http://alizi.5hi.cn/Public/Uploads/201510/20151010140415_33013.jpg\" alt=\"\"/></span> </p><p>{[AliziOrder]}</p><p><br/></p>', '', '0', '', '0', '0', '0', '', 'null', '10', '1555999048', '1443372259');
 INSERT INTO `alizi_item` VALUES ('7', '2', '1p7LSu3a', '1', 'test', '', '', '1.00', '0.01', '22', '1', '', '/201904/5cb7e8c6a98f7.jpg', '/201904/5cbab5b7c0317.jpg', '/201904/5cbab5b7c0317.jpg', '1', '0', '0', '0', '[]', 'radio', null, '[{\"title\":\"1\",\"value\":\"1\",\"type\":\"text\"}]', '<p><img src=\"http://dingdan.com/Public/Uploads/201904/15557454679009.jpg\" _src=\"http://dingdan.com/Public/Uploads/201904/15557454679009.jpg\"/>ad</p>', '', '0', '', '0', '0', '0', '', 'null', '0', '1555745474', '1555554234');
+INSERT INTO `alizi_item` VALUES ('8', '2', 'ntxg001', '1', '钱排三华李', '', '', '49.00', '36.00', '13', '1', '', '/201904/5cbeb6f8520b0.jpg', '', '', '1', '0', '0', '0', '[{\"title\":\"3\\u65a4\",\"price\":\"36\",\"image\":\"\",\"qrcode\":\"\\/201904\\/5cbeb6f8520b0.jpg\"},{\"title\":\"5\\u65a4\",\"price\":\"68\",\"image\":\"\",\"qrcode\":\"\\/201904\\/5cbeb6f8520b0.jpg\"},{\"title\":\"10\\u65a4\",\"price\":\"119\",\"image\":\"\",\"qrcode\":\"\\/201904\\/5cbeb6f8520b0.jpg\"}]', 'radio', null, '', '<p>dfdf&nbsp;</p>', '', '0', '', '0', '0', '0', '', 'null', '1', '1556002562', '1555999497');
 
 -- ----------------------------
 -- Table structure for alizi_item_template
@@ -220,6 +221,8 @@ CREATE TABLE `alizi_item_template` (
 -- ----------------------------
 -- Records of alizi_item_template
 -- ----------------------------
+INSERT INTO `alizi_item_template` VALUES ('7', 'thin', '[\"quantity\",\"price\",\"datetime\",\"name\",\"mobile\",\"region\",\"address\",\"remark\",\"payment\"]', '750px', '0', '0', '', '{\"body_bg\":\"F1F1F1\",\"form_bg\":\"FFFFFF\",\"title_bg\":\"666666\",\"button_bg\":\"EE3300\",\"font\":\"333333\",\"border\":\"666666\",\"nav_bg\":\"EE3300\"}', '', 'a:3:{s:7:\"padding\";s:1:\"0\";s:10:\"bottom_nav\";s:1:\"0\";s:15:\"bottom_nav_list\";a:3:{i:1;s:0:\"\";i:2;s:0:\"\";i:3;s:0:\"\";}}');
+INSERT INTO `alizi_item_template` VALUES ('8', 'thin', '[\"quantity\",\"price\",\"datetime\",\"name\",\"mobile\",\"region\",\"address\",\"remark\",\"payment\"]', '750px', '0', '0', '', '{\"body_bg\":\"F1F1F1\",\"form_bg\":\"FFFFFF\",\"title_bg\":\"666666\",\"button_bg\":\"EE3300\",\"font\":\"333333\",\"border\":\"666666\",\"nav_bg\":\"EE3300\"}', '', 'a:3:{s:7:\"padding\";s:1:\"0\";s:10:\"bottom_nav\";s:1:\"0\";s:15:\"bottom_nav_list\";a:3:{i:1;s:0:\"\";i:2;s:0:\"\";i:3;s:0:\"\";}}');
 
 -- ----------------------------
 -- Table structure for alizi_order
@@ -263,7 +266,7 @@ CREATE TABLE `alizi_order` (
   `add_time` int(10) NOT NULL,
   `update_time` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='产品订单表-alizi.net';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='产品订单表-alizi.net';
 
 -- ----------------------------
 -- Records of alizi_order
@@ -272,6 +275,17 @@ INSERT INTO `alizi_order` VALUES ('1', '0', '0', '190418774121', '', '6', '阿�
 INSERT INTO `alizi_order` VALUES ('2', '0', '0', '190418486846', '', '6', '阿克苏温185纸皮核桃sms', '香槟金', '{\"\\u5c3a\\u7801\":[\" S\\/165\\uff08\\u9002\\u5408100\\u65a4-125\\u65a4\\uff09\",\"XL\\/180\\uff08\\u9002\\u5408155\\u65a4-170\\u65a4\\uff09\"],\"\\u989c\\u8272\":\"\\u7ea2\\u8272\",\"\\u5f71\\u7247\\u7f16\\u53f7\":\"14\"}', '55.00', '50.00', '0.00', '50.00', '1', '0000-00-00 00:00:00', '14', '13071606344', '', '河南省 郑州市 中原区', '141414', '', '', '', '14', '3', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Item&a=order&id=6uaXmYzy', 'http://dingdan.com/index.php?m=Item&a=index', '1555553545', '0');
 INSERT INTO `alizi_order` VALUES ('3', '0', '4', '190418239528', '', '6', '阿克苏温185纸皮核桃sms', '香槟金', '{\"\\u5c3a\\u7801\":[\" S\\/165\\uff08\\u9002\\u5408100\\u65a4-125\\u65a4\\uff09\"],\"\\u989c\\u8272\":\"\\u7ea2\\u8272\",\"\\u5f71\\u7247\\u7f16\\u53f7\":\"pop;\"}', '55.00', '50.00', '0.00', '50.00', '1', '0000-00-00 00:00:00', 'kdsd', '13721606032', '', '河南省 郑州市 中原区', 'efdfgfg', '', '', '', 'fdfgdg', '1', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Item&a=order&id=6uaXmYzy', 'http://dingdan.com/index.php?m=Item&a=index', '1555553600', '1555740253');
 INSERT INTO `alizi_order` VALUES ('4', '0', '7', '190418518700', '', '6', '阿克苏温185纸皮核桃sms', '香槟金', '{\"\\u5c3a\\u7801\":[\" S\\/165\\uff08\\u9002\\u5408100\\u65a4-125\\u65a4\\uff09\"],\"\\u989c\\u8272\":\"\\u7ea2\\u8272\",\"\\u5f71\\u7247\\u7f16\\u53f7\":\"jh\"}', '55.00', '50.00', '0.00', '50.00', '1', '0000-00-00 00:00:00', 'jfdfdsf', '13721606032', '', '湖北省 武汉市 江岸区', 'wdljkl', '', '', '', 'fdsf', '1', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Item&a=order&id=6uaXmYzy', 'http://dingdan.com/index.php?m=Order&a=pay&order_no=190418239528', '1555553683', '1555739827');
+INSERT INTO `alizi_order` VALUES ('5', '0', '0', '190423304584', '', '6', '阿克苏温185纸皮核桃sms1', '香槟金', '{\"\\u5c3a\\u7801\":[\" S\\/165\\uff08\\u9002\\u5408100\\u65a4-125\\u65a4\\uff09\",\" M\\/170\\uff08\\u9002\\u5408125\\u65a4-140\\u65a4\\uff09\"],\"\\u989c\\u8272\":\"\\u767d\\u8272\",\"\\u5f71\\u7247\\u7f16\\u53f7\":\"hgghjhgjghj\"}', '55.00', '540.00', '0.00', '540.00', '1', '0000-00-00 00:00:00', 'kjh', '13071606032', '', '广东省 广州市 荔湾区', 'hgjh', '', '', '', '', '1', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Index&a=order&id=6uaXmYzy', 'http://dingdan.com/', '1555985848', '0');
+INSERT INTO `alizi_order` VALUES ('6', '0', '0', '190423725505', '', '6', '阿克苏温185纸皮核桃sms1', '香槟金', '{\"\\u5c3a\\u7801\":[\" S\\/165\\uff08\\u9002\\u5408100\\u65a4-125\\u65a4\\uff09\",\" M\\/170\\uff08\\u9002\\u5408125\\u65a4-140\\u65a4\\uff09\"],\"\\u989c\\u8272\":\"\\u767d\\u8272\",\"\\u5f71\\u7247\\u7f16\\u53f7\":\"101\"}', '55.00', '540.00', '0.00', '540.00', '1', '0000-00-00 00:00:00', '101', '13074909606', '', '北京市 市辖区 东城区', '141222222', '', '', '', '', '1', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Index&a=order&id=6uaXmYzy', 'http://dingdan.com/index.php?m=Index&a=category', '1556001831', '0');
+INSERT INTO `alizi_order` VALUES ('7', '0', '0', '190423552400', '', '1', '古早味黑糖沙琪玛', '黑糖沙琪玛', '{\"\\u9009\\u62e9\\u989c\\u8272\":\"\\u7ea2\\u8272\"}', '1.00', '12.00', '0.00', '12.00', '1', '0000-00-00 00:00:00', '101', '13074909606', '', '北京市 市辖区 东城区', '141222222', '', '', '', '', '5', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Index&a=order&id=1uaXmYzy', 'http://dingdan.com/', '1556002157', '0');
+INSERT INTO `alizi_order` VALUES ('8', '0', '0', '190423629727', '', '1', '古早味黑糖沙琪玛', '黑糖沙琪玛', '{\"\\u9009\\u62e9\\u989c\\u8272\":\"\\u7ea2\\u8272\"}', '1.00', '12.00', '0.00', '12.00', '1', '0000-00-00 00:00:00', '101', '13074909606', '', '北京市 市辖区 东城区', '141222222', '', '', '', '', '5', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Item&a=order&id=1uaXmYzy', 'http://dingdan.com/index.php?m=Item&a=index', '1556002199', '0');
+INSERT INTO `alizi_order` VALUES ('9', '0', '0', '190423745348', '', '1', '古早味黑糖沙琪玛', '红糖沙琪玛', '{\"\\u9009\\u62e9\\u989c\\u8272\":\"\\u7ea2\\u8272\"}', '1.00', '15.00', '0.00', '15.00', '1', '0000-00-00 00:00:00', '101', '13074909606', '', '北京市 市辖区 东城区', '141222222', '', '', '', '', '5', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Item&a=order&id=1uaXmYzy', 'http://dingdan.com/index.php?m=Item&a=index', '1556002223', '0');
+INSERT INTO `alizi_order` VALUES ('10', '0', '0', '190423997850', '', '1', '古早味黑糖沙琪玛', '黑糖沙琪玛', '{\"\\u9009\\u62e9\\u989c\\u8272\":\"\\u7ea2\\u8272\"}', '1.00', '12.00', '0.00', '12.00', '1', '0000-00-00 00:00:00', '101', '13074909606', '', '北京市 市辖区 东城区', '141222222', '', '', '', '', '5', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Item&a=order&id=1uaXmYzy', 'http://dingdan.com/index.php?m=Item&a=index', '1556002327', '0');
+INSERT INTO `alizi_order` VALUES ('11', '0', '0', '190423650383', '', '1', '古早味黑糖沙琪玛', '红糖沙琪玛', '{\"\\u9009\\u62e9\\u989c\\u8272\":\"\\u7ea2\\u8272\"}', '1.00', '15.00', '0.00', '15.00', '1', '0000-00-00 00:00:00', '101', '13074909606', '', '北京市 市辖区 东城区', '141222222', '', '', '', '', '5', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Item&a=order&id=1uaXmYzy', 'http://dingdan.com/index.php?m=Order&a=pay&order_no=190423997850', '1556002374', '0');
+INSERT INTO `alizi_order` VALUES ('12', '0', '0', '190423165676', '', '1', '古早味黑糖沙琪玛', '黑糖沙琪玛', '{\"\\u9009\\u62e9\\u989c\\u8272\":\"\\u7ea2\\u8272\"}', '1.00', '12.00', '0.00', '12.00', '1', '0000-00-00 00:00:00', '101', '13074909606', '', '北京市 市辖区 东城区', '141222222', '', '', '', '', '5', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Item&a=order&id=1uaXmYzy', 'http://dingdan.com/index.php?m=Order&a=pay&order_no=190423650383', '1556002409', '0');
+INSERT INTO `alizi_order` VALUES ('13', '0', '0', '190423675685', '', '1', '古早味黑糖沙琪玛', '红糖沙琪玛', '{\"\\u9009\\u62e9\\u989c\\u8272\":\"\\u7ea2\\u8272\"}', '1.00', '15.00', '0.00', '15.00', '1', '0000-00-00 00:00:00', '101', '13074909606', '', '北京市 市辖区 东城区', '141222222', '', '', '', '', '5', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Item&a=order&id=1uaXmYzy', 'http://dingdan.com/index.php?m=Order&a=pay&order_no=190423165676', '1556002455', '0');
+INSERT INTO `alizi_order` VALUES ('14', '0', '0', '190423572256', '', '1', '古早味黑糖沙琪玛', '红糖沙琪玛', '{\"\\u9009\\u62e9\\u989c\\u8272\":\"\\u7ea2\\u8272\"}', '1.00', '15.00', '0.00', '15.00', '1', '0000-00-00 00:00:00', '101', '13074909606', '', '北京市 市辖区 东城区', '141222222', '', '', '', '', '5', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Item&a=order&id=1uaXmYzy', 'http://dingdan.com/index.php?m=Order&a=pay&order_no=190423675685', '1556002480', '0');
+INSERT INTO `alizi_order` VALUES ('15', '0', '0', '190423751466', '', '8', '钱排三华李', '3斤', 'null', '36.00', '36.00', '0.00', '36.00', '1', '0000-00-00 00:00:00', '101', '13074909606', '', '北京市 市辖区 东城区', '141222222', '', '', '', 'csdf', '5', '', '', '', '1', '127.0.0.1', '0', '0', 'http://dingdan.com/index.php?m=Index&a=order&id=ntxg001', 'http://dingdan.com/index.php?m=Index&a=category', '1556002570', '0');
 
 -- ----------------------------
 -- Table structure for alizi_order_log
@@ -285,7 +299,7 @@ CREATE TABLE `alizi_order_log` (
   `user_id` int(12) NOT NULL,
   `remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='产品订单记录表-alizi.net';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='产品订单记录表-alizi.net';
 
 -- ----------------------------
 -- Records of alizi_order_log
@@ -300,6 +314,17 @@ INSERT INTO `alizi_order_log` VALUES ('7', '4', '4', '1555739817', '2', 'd ');
 INSERT INTO `alizi_order_log` VALUES ('8', '4', '7', '1555739827', '2', '');
 INSERT INTO `alizi_order_log` VALUES ('9', '3', '3', '1555740244', '2', '都');
 INSERT INTO `alizi_order_log` VALUES ('10', '3', '4', '1555740253', '2', '是的撒');
+INSERT INTO `alizi_order_log` VALUES ('11', '5', '0', '1555985848', '0', '');
+INSERT INTO `alizi_order_log` VALUES ('12', '6', '0', '1556001831', '0', '');
+INSERT INTO `alizi_order_log` VALUES ('13', '7', '0', '1556002157', '0', '');
+INSERT INTO `alizi_order_log` VALUES ('14', '8', '0', '1556002199', '0', '');
+INSERT INTO `alizi_order_log` VALUES ('15', '9', '0', '1556002223', '0', '');
+INSERT INTO `alizi_order_log` VALUES ('16', '10', '0', '1556002327', '0', '');
+INSERT INTO `alizi_order_log` VALUES ('17', '11', '0', '1556002374', '0', '');
+INSERT INTO `alizi_order_log` VALUES ('18', '12', '0', '1556002409', '0', '');
+INSERT INTO `alizi_order_log` VALUES ('19', '13', '0', '1556002455', '0', '');
+INSERT INTO `alizi_order_log` VALUES ('20', '14', '0', '1556002480', '0', '');
+INSERT INTO `alizi_order_log` VALUES ('21', '15', '0', '1556002570', '0', 'csdf');
 
 -- ----------------------------
 -- Table structure for alizi_setting
@@ -314,22 +339,22 @@ CREATE TABLE `alizi_setting` (
 -- ----------------------------
 -- Records of alizi_setting
 -- ----------------------------
-INSERT INTO `alizi_setting` VALUES ('title', 'PHP订单管理系统');
-INSERT INTO `alizi_setting` VALUES ('keywords', 'PHP订单管理系统');
-INSERT INTO `alizi_setting` VALUES ('logo_pc', '/201904/5cbac5c25c148.jpg');
-INSERT INTO `alizi_setting` VALUES ('logo', '');
-INSERT INTO `alizi_setting` VALUES ('description', 'PHP订单管理系统');
-INSERT INTO `alizi_setting` VALUES ('footer', 'Copyright (c) 2016 <a href=\"http://www.010xr.com\"  target=\"_blank\">www.010xr.com</a> All Rights Reserved');
+INSERT INTO `alizi_setting` VALUES ('title', '农田小哥订单管理系统');
+INSERT INTO `alizi_setting` VALUES ('keywords', '农田小哥订单管理系统');
+INSERT INTO `alizi_setting` VALUES ('logo_pc', '/201904/5cbead3200ffa.jpg');
+INSERT INTO `alizi_setting` VALUES ('logo', '/201904/5cbead3200ffa.jpg');
+INSERT INTO `alizi_setting` VALUES ('description', '农田小哥订单管理系统');
+INSERT INTO `alizi_setting` VALUES ('footer', 'Copyright (c) 2019 <a href=\"www.nongtianxiaoge.com\"  target=\"_blank\">www.nongtianxiaoge.com</a> All Rights Reserved');
 INSERT INTO `alizi_setting` VALUES ('contact_tel', '13800000000');
 INSERT INTO `alizi_setting` VALUES ('contact_qq', '');
 INSERT INTO `alizi_setting` VALUES ('system_status', '1');
-INSERT INTO `alizi_setting` VALUES ('system_close_info', 'http://www.010xr.com');
-INSERT INTO `alizi_setting` VALUES ('URL_MODEL', '0');
-INSERT INTO `alizi_setting` VALUES ('theme_color', 'ED145B');
+INSERT INTO `alizi_setting` VALUES ('system_close_info', 'http://www.nongtianxiaoge.com');
+INSERT INTO `alizi_setting` VALUES ('URL_MODEL', '2');
+INSERT INTO `alizi_setting` VALUES ('theme_color', 'ED165A');
 INSERT INTO `alizi_setting` VALUES ('system_template', 'thin');
 INSERT INTO `alizi_setting` VALUES ('order_options', '[\"price\",\"quantity\",\"payment\",\"name\",\"mobile\",\"region\",\"address\",\"remark\"]');
-INSERT INTO `alizi_setting` VALUES ('show_notice', '0');
-INSERT INTO `alizi_setting` VALUES ('record_order', '0');
+INSERT INTO `alizi_setting` VALUES ('show_notice', '1');
+INSERT INTO `alizi_setting` VALUES ('record_order', '1');
 INSERT INTO `alizi_setting` VALUES ('repeat_order', '1');
 INSERT INTO `alizi_setting` VALUES ('slider_show', '1');
 INSERT INTO `alizi_setting` VALUES ('slider_num', '5');
@@ -388,6 +413,7 @@ INSERT INTO `alizi_setting` VALUES ('safe_ip_denied', '');
 INSERT INTO `alizi_setting` VALUES ('delivery_setting', '[\"huitongkuaidi\",\"yuananda\"]');
 INSERT INTO `alizi_setting` VALUES ('notice', '');
 INSERT INTO `alizi_setting` VALUES ('contact_phone', '');
+INSERT INTO `alizi_setting` VALUES ('lazyload', '0');
 
 -- ----------------------------
 -- Table structure for alizi_shipping
@@ -441,5 +467,5 @@ CREATE TABLE `alizi_user` (
 -- ----------------------------
 -- Records of alizi_user
 -- ----------------------------
-INSERT INTO `alizi_user` VALUES ('2', '0', 'admin', 'dcafaaf0e55d98d2f5ddec9bbc2463a2', 'admin', '1', '', '', '', '', '', '0', '127.0.0.1', '2019-04-22 17:52:17', '0', '1555552508');
-INSERT INTO `alizi_user` VALUES ('3', '0', '1234', '85dcf91c51b058b4fda7e73b37f4fd85', 'member', '1', '111', '13071601631', '1', '', '', '0', '127.0.0.1', '2019-04-18 10:34:37', '1555553118', '0');
+INSERT INTO `alizi_user` VALUES ('2', '0', 'admin', 'dcafaaf0e55d98d2f5ddec9bbc2463a2', 'admin', '1', '', '', '', '', '', '0', '127.0.0.1', '2019-04-23 14:13:51', '0', '1555552508');
+INSERT INTO `alizi_user` VALUES ('3', '0', '1234', '85dcf91c51b058b4fda7e73b37f4fd85', 'member', '1', '111', '13071601631', '1', '', '', '0', '127.0.0.1', '2019-04-23 10:24:08', '1555553118', '0');
